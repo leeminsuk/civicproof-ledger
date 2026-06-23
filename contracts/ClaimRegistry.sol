@@ -15,8 +15,15 @@ contract ClaimRegistry {
 
     mapping(bytes32 => mapping(bytes32 => Claim)) private claims;
     mapping(bytes32 => uint256) public programClaimCounts;
+    mapping(address => bool) private authorizedIssuers;
+
+    address public owner;
     uint256 public duplicateAttempts;
     uint256 public totalClaims;
+
+    error UnauthorizedIssuer(address issuer);
+    error OwnableUnauthorizedAccount(address account);
+    error InvalidInput();
 
     event ClaimRegistered(
         bytes32 indexed programId,
@@ -32,12 +39,55 @@ contract ClaimRegistry {
         string metadataUri
     );
 
+    event IssuerAuthorizationUpdated(address indexed issuer, bool authorized);
+
+    constructor() {
+        owner = msg.sender;
+        authorizedIssuers[msg.sender] = true;
+        emit IssuerAuthorizationUpdated(msg.sender, true);
+    }
+
+    modifier onlyOwner() {
+        if (msg.sender != owner) {
+            revert OwnableUnauthorizedAccount(msg.sender);
+        }
+        _;
+    }
+
+    modifier onlyAuthorizedIssuer() {
+        if (!authorizedIssuers[msg.sender]) {
+            revert UnauthorizedIssuer(msg.sender);
+        }
+        _;
+    }
+
+    function authorizeIssuer(address issuer, bool authorized) external onlyOwner {
+        if (issuer == address(0)) {
+            revert InvalidInput();
+        }
+        authorizedIssuers[issuer] = authorized;
+        emit IssuerAuthorizationUpdated(issuer, authorized);
+    }
+
+    function isAuthorizedIssuer(address issuer) external view returns (bool) {
+        return authorizedIssuers[issuer];
+    }
+
     function registerClaim(
         bytes32 programId,
         bytes32 nullifierHash,
         bytes32 commitmentHash,
         string calldata metadataUri
-    ) external returns (bool accepted) {
+    ) external onlyAuthorizedIssuer returns (bool accepted) {
+        if (
+            programId == bytes32(0) ||
+            nullifierHash == bytes32(0) ||
+            commitmentHash == bytes32(0) ||
+            bytes(metadataUri).length == 0
+        ) {
+            revert InvalidInput();
+        }
+
         Claim storage existing = claims[programId][nullifierHash];
 
         if (existing.registeredAt != 0) {
