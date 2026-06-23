@@ -7,6 +7,8 @@
   "scripts": {
     "test": "vitest run",
     "build": "tsc -p tsconfig.json",
+    "test:contracts": "hardhat test",
+    "evaluate": "python3 harness/evaluate_submission.py",
     "demo": "tsx src/demo.ts",
     "start": "tsx src/demo.ts"
   },
@@ -14,8 +16,17 @@
     "@noble/ed25519": "^2.3.0",
     "commander": "^12.1.0"
   },
+  "overrides": {
+    "diff": "^8.0.3",
+    "serialize-javascript": "^7.0.5"
+  },
   "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^4.0.13",
+    "@nomicfoundation/hardhat-mocha": "^3.0.21",
     "@types/node": "^26.0.0",
+    "chai": "^6.2.2",
+    "hardhat": "^3.9.0",
+    "mocha": "^11.7.6",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "vitest": "^4.1.9"

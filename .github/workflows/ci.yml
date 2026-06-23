@@ -2,28 +2,21 @@ name: CI
 
 on:
   push:
-    branches: [main]
   pull_request:
-    branches: [main]
 
 jobs:
-  test-build:
+  verify:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: 22
           cache: npm
-      - name: Install
-        run: npm ci
-      - name: Test
-        run: npm test
-      - name: Build
-        run: npm run build
-      - name: Demo smoke
-        run: npm run demo
-      - name: Production dependency audit
-        run: npm audit --omit=dev
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npm run test:contracts
+      - run: npm run demo
+      - run: npm run evaluate
+      - run: npm audit

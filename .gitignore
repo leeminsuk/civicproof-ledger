@@ -1,6 +1,8 @@
 node_modules/
 dist/
 coverage/
+artifacts/
+cache/
 .env
 .env.*
 !.env.example

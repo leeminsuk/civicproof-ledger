@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CivicProof Ledger Verifier</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "@noble/ed25519": "../node_modules/@noble/ed25519/index.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">CivicProof Ledger</p>
+          <h1>Signed duplicate-benefit verification</h1>
+          <p class="lede">Paste a demo Ed25519 credential, check its signature, and compare it with the public audit trail.</p>
+        </div>
+        <div id="result-panel" class="result normal">
+          <strong>NORMAL</strong>
+          <span>Ready.</span>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="panel verifier">
+          <div class="panel-header">
+            <h2>Verifier</h2>
+            <button id="load-demo-button" type="button">Load demo</button>
+          </div>
+          <textarea id="credential-json" spellcheck="false" aria-label="Credential JSON"></textarea>
+          <button id="verify-button" class="primary" type="button">Verify credential</button>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h2>Public Audit</h2>
+          </div>
+          <div class="metrics">
+            <div><span id="accepted-claims">0</span><small>Accepted</small></div>
+            <div><span id="duplicate-attempts">0</span><small>Duplicates</small></div>
+            <div><span id="programs">0</span><small>Programs</small></div>
+            <div><span id="pii-fields">0</span><small>PII fields</small></div>
+          </div>
+          <ol id="timeline" class="timeline"></ol>
+        </article>
+      </section>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

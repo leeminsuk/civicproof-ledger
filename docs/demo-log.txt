@@ -1,0 +1,12 @@
+
+> civicproof-ledger@0.1.0 demo
+> tsx src/demo.ts
+
+CivicProof Ledger demo
+Accepted claims: 2
+Duplicate attempts: 1
+Programs represented: 2
+PII stored on-chain: 0 fields
+ClaimRegistered osscontest-2026 0xd47c663026e211c0530b47229380f78237c9769c1dfcb6d13e120898adf68368
+DuplicateDetected osscontest-2026 0xd47c663026e211c0530b47229380f78237c9769c1dfcb6d13e120898adf68368
+ClaimRegistered scholarship-2026 0xc5689ae35629d1efd88a0d2b7e2f7ceafceee22216b5440b0db943a750bbc59f

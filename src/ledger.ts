@@ -60,6 +60,7 @@ export class InMemoryClaimRegistry {
   private duplicateAttempts = 0;
 
   registerClaim(input: ClaimInput): ClaimResult {
+    validateClaimInput(input);
     const key = this.claimKey(input.programId, input.nullifierHash);
     const timestamp = new Date().toISOString();
 
@@ -90,7 +91,12 @@ export class InMemoryClaimRegistry {
   }
 
   auditEvents(): AuditEvent[] {
-    return [...this.events];
+    return this.events.map((event) => ({ ...event }));
+  }
+
+  getClaim(programId: string, nullifierHash: string): ClaimRecord | undefined {
+    const claim = this.claims.get(this.claimKey(programId, nullifierHash));
+    return claim ? { ...claim } : undefined;
   }
 
   stats(): RegistryStats {
@@ -103,5 +109,20 @@ export class InMemoryClaimRegistry {
 
   private claimKey(programId: string, nullifierHash: string): string {
     return `${programId}:${nullifierHash.toLowerCase()}`;
+  }
+}
+
+function validateClaimInput(input: ClaimInput): void {
+  if (!input.programId.trim()) {
+    throw new Error('programId is required');
+  }
+  if (!/^0x[0-9a-fA-F]{64}$/.test(input.nullifierHash)) {
+    throw new Error('nullifierHash must be a 32-byte hex string');
+  }
+  if (!/^0x[0-9a-fA-F]{64}$/.test(input.commitmentHash)) {
+    throw new Error('commitmentHash must be a 32-byte hex string');
+  }
+  if (!input.metadataUri.trim()) {
+    throw new Error('metadataUri is required');
   }
 }
