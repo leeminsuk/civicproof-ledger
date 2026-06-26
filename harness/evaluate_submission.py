@@ -78,6 +78,8 @@ def main() -> int:
         ("Hardhat contract tests exist", 10, exists("hardhat.config.js") and exists("tests/contracts/ClaimRegistry.test.js")),
         ("ClaimRegistry has owner-managed issuer allowlist", 12, all(token in contract for token in ["owner", "authorizedIssuers", "authorizeIssuer", "isAuthorizedIssuer", "UnauthorizedIssuer", "IssuerAuthorizationUpdated"])),
         ("ClaimRegistry validates zero hashes and empty metadata", 8, all(token in contract for token in ["InvalidInput", "programId == bytes32(0)", "nullifierHash == bytes32(0)", "commitmentHash == bytes32(0)", "bytes(metadataUri).length == 0"])),
+        ("ClaimRegistry supports ownership transfer for governance/multisig migration", 8, all(token in contract for token in ["transferOwnership", "OwnershipTransferred", "newOwner == address(0)"])),
+        ("ClaimRegistry exposes program-level duplicate counters", 8, "programDuplicateCounts" in contract and "programDuplicateCounts[programId] += 1" in contract),
         ("Docs explain issuer allowlist/access control", 8, all(token.lower() in docs_text.lower() for token in ["issuer allowlist", "role-based access control", "authorized issuer"])),
         ("GitHub Pages workflow publishes web/", 8, exists(".github/workflows/pages.yml") and all(token in read(".github/workflows/pages.yml") for token in ["upload-pages-artifact", "deploy-pages", "path: web"])),
         ("SBOM exists", 8, exists("sbom.spdx.json")),

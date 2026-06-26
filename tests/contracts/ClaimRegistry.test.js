@@ -83,6 +83,48 @@ describe('ClaimRegistry contract', function () {
     expect(await registry.isAuthorizedIssuer(issuer.address)).to.equal(false);
   });
 
+  it('owner can transfer ownership and emits OwnershipTransferred', async function () {
+    const { registry, owner, issuer, stranger } = await deployRegistry();
+
+    const receipt = await (await registry.transferOwnership(issuer.address)).wait();
+    const event = eventByName(registry, receipt, 'OwnershipTransferred');
+
+    expect(event.args.previousOwner).to.equal(owner.address);
+    expect(event.args.newOwner).to.equal(issuer.address);
+    expect(await registry.owner()).to.equal(issuer.address);
+    expect(await registry.isAuthorizedIssuer(owner.address)).to.equal(false);
+    expect(await registry.isAuthorizedIssuer(issuer.address)).to.equal(true);
+
+    await expectRevertedWith(
+      registry.authorizeIssuer(stranger.address, true),
+      'OwnableUnauthorizedAccount'
+    );
+    await expectRevertedWith(
+      registry.registerClaim(programA, nullifier, commitmentA, 'ipfs://old-owner'),
+      'UnauthorizedIssuer'
+    );
+    await registry.connect(issuer).authorizeIssuer(stranger.address, true);
+    expect(await registry.isAuthorizedIssuer(stranger.address)).to.equal(true);
+  });
+
+  it('rejects zero-address ownership transfer', async function () {
+    const { registry } = await deployRegistry();
+
+    await expectRevertedWith(
+      registry.transferOwnership(ethers.ZeroAddress),
+      'InvalidInput'
+    );
+  });
+
+  it('non-owner cannot transfer ownership', async function () {
+    const { registry, issuer, stranger } = await deployRegistry();
+
+    await expectRevertedWith(
+      registry.connect(stranger).transferOwnership(issuer.address),
+      'OwnableUnauthorizedAccount'
+    );
+  });
+
   it('owner can revoke an issuer', async function () {
     const { registry, issuer } = await deployRegistry();
     await registry.authorizeIssuer(issuer.address, true);
@@ -146,6 +188,20 @@ describe('ClaimRegistry contract', function () {
 
     expect(await registry.totalClaims()).to.equal(1n);
     expect(await registry.duplicateAttempts()).to.equal(1n);
+    expect(await registry.programDuplicateCounts(programA)).to.equal(1n);
+  });
+
+  it('keeps duplicate counts separated by program', async function () {
+    const { registry } = await deployRegistry();
+
+    await registry.registerClaim(programA, nullifier, commitmentA, 'ipfs://a-1');
+    await registry.registerClaim(programA, nullifier, commitmentB, 'ipfs://a-duplicate');
+    await registry.registerClaim(programB, nullifier, commitmentA, 'ipfs://b-1');
+    await registry.registerClaim(programB, nullifier, commitmentB, 'ipfs://b-duplicate');
+
+    expect(await registry.duplicateAttempts()).to.equal(2n);
+    expect(await registry.programDuplicateCounts(programA)).to.equal(1n);
+    expect(await registry.programDuplicateCounts(programB)).to.equal(1n);
   });
 
   it('allows the same nullifier in separate programs', async function () {

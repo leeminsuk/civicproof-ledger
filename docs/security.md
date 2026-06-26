@@ -6,7 +6,8 @@
 - Nullifiers are program-scoped, so a duplicate in one program does not block a separate program.
 - Credential verification detects tampered signed fields, wrong issuer DID, expired credentials, malformed proof material, and malformed JSON in the web verifier.
 - Audit events are returned as snapshots to prevent callers mutating registry history in memory.
-- The Solidity registry uses an issuer allowlist: only an authorized issuer can call `registerClaim`, and the owner can revoke agency keys.
+- The Solidity registry uses an issuer allowlist: only an authorized issuer can call `registerClaim`, the owner can revoke agency keys, and ownership can be transferred to a multisig/governance account.
+- Program-level duplicate counters let auditors distinguish one program's anomaly from global aggregate noise.
 - The web UI renders event data with DOM nodes and `textContent`, not `innerHTML`.
 
 ## Cryptography
@@ -24,7 +25,9 @@ Credentials are signed with Ed25519 via `@noble/ed25519`. The signed payload is 
 - Unauthorized registration attempts revert with `UnauthorizedIssuer` before counters, claims, or events are updated.
 - Zero program IDs, nullifiers, commitments, and empty metadata URIs revert with `InvalidInput`.
 
-For production, the owner should be a multisig or DAO-controlled account. Issuer keys should be stored in a hardware-backed or cloud KMS environment, rotated on incident, and monitored by off-chain audit tooling.
+For production, the deployer should call `transferOwnership(multisig)` before onboarding real issuers. The transfer automatically deauthorizes the previous owner as an issuer and authorizes the new owner, preventing the deployer key from retaining write access by accident. Issuer keys should be stored in a hardware-backed or cloud KMS environment, rotated on incident, and monitored by off-chain audit tooling. The contest prototype is commitment/nullifier based; if the deployment requires stronger unlinkability against issuer-side salt disclosure, add Semaphore/Noir ZK membership proofs before production rollout.
+
+`deterministicTestKeyPair` is for reproducible tests and demos only. Production issuers must use keys generated and stored outside source control. The deterministic demo issuer key is deliberately labeled as test/demo material; it is not a security claim for production credentials.
 
 ## Non-Goals
 

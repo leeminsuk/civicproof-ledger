@@ -15,6 +15,7 @@ contract ClaimRegistry {
 
     mapping(bytes32 => mapping(bytes32 => Claim)) private claims;
     mapping(bytes32 => uint256) public programClaimCounts;
+    mapping(bytes32 => uint256) public programDuplicateCounts;
     mapping(address => bool) private authorizedIssuers;
 
     address public owner;
@@ -24,6 +25,8 @@ contract ClaimRegistry {
     error UnauthorizedIssuer(address issuer);
     error OwnableUnauthorizedAccount(address account);
     error InvalidInput();
+
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
     event ClaimRegistered(
         bytes32 indexed programId,
@@ -69,6 +72,19 @@ contract ClaimRegistry {
         emit IssuerAuthorizationUpdated(issuer, authorized);
     }
 
+    function transferOwnership(address newOwner) external onlyOwner {
+        if (newOwner == address(0)) {
+            revert InvalidInput();
+        }
+        address previousOwner = owner;
+        owner = newOwner;
+        authorizedIssuers[previousOwner] = false;
+        authorizedIssuers[newOwner] = true;
+        emit OwnershipTransferred(previousOwner, newOwner);
+        emit IssuerAuthorizationUpdated(previousOwner, false);
+        emit IssuerAuthorizationUpdated(newOwner, true);
+    }
+
     function isAuthorizedIssuer(address issuer) external view returns (bool) {
         return authorizedIssuers[issuer];
     }
@@ -92,6 +108,7 @@ contract ClaimRegistry {
 
         if (existing.registeredAt != 0) {
             duplicateAttempts += 1;
+            programDuplicateCounts[programId] += 1;
             emit DuplicateDetected(programId, nullifierHash, commitmentHash, metadataUri);
             return false;
         }

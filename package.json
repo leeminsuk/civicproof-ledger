@@ -1,7 +1,7 @@
 {
   "name": "civicproof-ledger",
   "version": "0.1.0",
-  "description": "Privacy-preserving duplicate-benefit verification ledger for public grants and contests.",
+  "description": "Commitment-based duplicate-benefit verification ledger for public grants and contests.",
   "type": "module",
   "license": "Apache-2.0",
   "scripts": {

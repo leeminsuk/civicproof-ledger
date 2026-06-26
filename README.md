@@ -1,6 +1,6 @@
 # CivicProof Ledger
 
-Privacy-preserving duplicate-benefit verification ledger for public grants, contests, scholarships, and vouchers.
+Commitment-based duplicate-benefit verification ledger for public grants, contests, scholarships, and vouchers. The demo keeps raw personal data off-chain and uses program-scoped nullifiers; full zero-knowledge proof integration is documented as a production roadmap item rather than claimed in this prototype.
 
 ## Contest-Ready Demo
 
@@ -10,8 +10,8 @@ This repository provides:
 - An in-memory claim registry that accepts first claims, rejects duplicates, and exposes audit events plus summary stats.
 - Demo Ed25519-signed verifiable credential issue and verify helpers using `@noble/ed25519`.
 - A static verifier and public audit UI under `web/`.
-- A Solidity `ClaimRegistry` with owner-managed issuer allowlist, authorized issuer checks, and zero-value input validation.
-- Hardhat tests for deployment, issuer role-based access control, duplicate detection, and read paths.
+- A Solidity `ClaimRegistry` with owner-managed issuer allowlist, authorized issuer checks, ownership transfer for multisig/governance migration, program-level duplicate counters, and zero-value input validation.
+- Hardhat tests for deployment, issuer role-based access control, ownership transfer, duplicate detection, program-level duplicate accounting, and read paths.
 - A demo CLI scenario with two accepted claims and one duplicate rejection.
 - A contest harness that checks tests, CI, SBOM, Pages workflow, safe web rendering, and final DOCX placeholder hygiene.
 
