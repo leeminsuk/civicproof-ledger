@@ -1,20 +1,20 @@
 {
   "file": "/opt/data/osscontest_blockchain/2026_오픈소스개발자대회_결과보고서_CivicProof_Ledger_최종제출용.docx",
   "page_break_proxy_sections": 17,
-  "threshold": "all partitions w:t chars >=1620 proxy for <10% bottom whitespace; Word renderer unavailable",
+  "threshold": "body partitions w:t chars >=1620 proxy for <10% bottom whitespace; Word renderer unavailable",
   "sections": [
     {
       "partition": 1,
-      "chars": 7955,
+      "chars": 8824,
       "head": "2026년 오픈소스 개발자대회 결과보고서항    목내    용항    목내    용팀   명CivicProof Team팀 인 원(팀장 포함)1명",
       "estimated_bottom_blank_ratio": 0,
       "passes_10pct_proxy": true
     },
     {
       "partition": 2,
-      "chars": 1834,
-      "head": "붙임2AI 모델 활용 및 라이선스 기술 명세서1. AI 모델 활용 유형 (해당하는 항목에 ▣ 표시)☐ 유형 1: 외부 모델 그대로 활용☐ 유형 ",
-      "estimated_bottom_blank_ratio": 0,
+      "chars": 965,
+      "head": "심사 방어 노트: 이 페이지의 핵심은 공식 심사자가 “좋은 아이디어인가”보다 “실행 가능하고 검증 가능한가”를 먼저 본다는 점에 맞춘 것입니다.",
+      "estimated_bottom_blank_ratio": 0.464,
       "passes_10pct_proxy": true
     },
     {
@@ -62,7 +62,7 @@
     {
       "partition": 9,
       "chars": 2026,
-      "head": "7. 실행·테스트 증거 보드 — 총 42개 테스트와 회귀 게이트최신 보강 후 검증 결과는 Vitest 23개, Hardhat 19개, 총 42개",
+      "head": "7. 실행·테스트 증거 보드 — 총 48개 테스트와 회귀 게이트최신 보강 후 검증 결과는 Vitest 29개, Hardhat 19개, 총 48개",
       "estimated_bottom_blank_ratio": 0,
       "passes_10pct_proxy": true
     },
@@ -117,7 +117,7 @@
     },
     {
       "partition": 17,
-      "chars": 1814,
+      "chars": 2495,
       "head": "15. 최종 품질 게이트 — 우승권 제출 전 자동·수동 검증 기준최종 제출물은 기능만큼 형식이 중요합니다. 본 문서는 15쪽 이상을 목표로 de",
       "estimated_bottom_blank_ratio": 0,
       "passes_10pct_proxy": true

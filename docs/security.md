@@ -14,6 +14,12 @@
 
 Credentials are signed with Ed25519 via `@noble/ed25519`. The signed payload is canonical JSON with sorted object keys and the proof value omitted before signing. This avoids demo-only string-order ambiguity while keeping the proof type explicit as `Ed25519Signature2020Demo`.
 
+The canonical JSON step uses the `json-canonicalize` package rather than a homegrown object sorter. The `proofValue` field is removed before canonicalization so a verifier signs and verifies the same payload boundary.
+
+`src/nullifierProof.ts` provides a Merkle inclusion proof for audit reproducibility. It is not a zero-knowledge proof, but it gives the project a concrete proof object and tamper test while keeping the ZK roadmap honest.
+
+`src/zkProof.ts` provides a dependency-light Schnorr-style non-interactive proof of knowledge over an RFC 3526 finite-field group. It proves knowledge of the subject secret behind a program nullifier without putting the subject identifier in the proof object. This is a contest demo proof, not a replacement for a formally audited Semaphore/Noir circuit.
+
 ## Role-Based Access Control
 
 `ClaimRegistry` implements a minimal owner-managed role-based access control model for contest reproducibility:

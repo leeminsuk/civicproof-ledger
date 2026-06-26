@@ -68,11 +68,14 @@ def final_docx_has_no_blanks_when_available() -> bool:
 
 def main() -> int:
     contract = read("contracts/ClaimRegistry.sol")
-    docs_text = "\n".join(read(path) for path in ["README.md", "docs/architecture.md", "docs/security.md", "docs/demo-script.md"] if exists(path))
+    docs_text = "\n".join(read(path) for path in ["README.md", "docs/architecture.md", "docs/security.md", "docs/demo-script.md", "docs/rubric-scorecard.md"] if exists(path))
     checks: list[tuple[str, int, bool]] = [
         ("Signed VC implementation uses @noble/ed25519", 12, "@noble/ed25519" in read("src/vc.ts")),
+        ("VC signing uses RFC8785-compatible JSON canonicalization dependency", 8, "json-canonicalize" in read("package.json") and "canonicalize(" in read("src/vc.ts")),
         ("Unsigned demo proof removed from production source and docs", 10, "UnsignedDemoProof" not in production_text()),
         ("Vitest and contract test count >= 30", 12, count_tests() >= 30),
+        ("Nullifier membership proof tests exist", 6, exists("src/nullifierProof.ts") and exists("tests/nullifierProof.test.ts")),
+        ("Schnorr-style NIZK demo proof exists and is tested", 10, exists("src/zkProof.ts") and exists("tests/zkProof.test.ts") and "SchnorrNullifierNIZKDemo" in read("src/zkProof.ts")),
         ("Static verifier web UI exists", 10, all(exists(p) for p in ["web/index.html", "web/styles.css", "web/app.js", "web/verifier.js"])),
         ("Web UI avoids innerHTML rendering", 8, "innerHTML" not in read("web/app.js")),
         ("Hardhat contract tests exist", 10, exists("hardhat.config.js") and exists("tests/contracts/ClaimRegistry.test.js")),
@@ -80,11 +83,12 @@ def main() -> int:
         ("ClaimRegistry validates zero hashes and empty metadata", 8, all(token in contract for token in ["InvalidInput", "programId == bytes32(0)", "nullifierHash == bytes32(0)", "commitmentHash == bytes32(0)", "bytes(metadataUri).length == 0"])),
         ("ClaimRegistry supports ownership transfer for governance/multisig migration", 8, all(token in contract for token in ["transferOwnership", "OwnershipTransferred", "newOwner == address(0)"])),
         ("ClaimRegistry exposes program-level duplicate counters", 8, "programDuplicateCounts" in contract and "programDuplicateCounts[programId] += 1" in contract),
+        ("Local deployment script and artifact exist", 8, exists("scripts/deploy-claim-registry.js") and exists("docs/deployments/local-hardhat-claim-registry.json") and "deploy:local" in read("package.json")),
         ("Docs explain issuer allowlist/access control", 8, all(token.lower() in docs_text.lower() for token in ["issuer allowlist", "role-based access control", "authorized issuer"])),
         ("GitHub Pages workflow publishes web/", 8, exists(".github/workflows/pages.yml") and all(token in read(".github/workflows/pages.yml") for token in ["upload-pages-artifact", "deploy-pages", "path: web"])),
         ("SBOM exists", 8, exists("sbom.spdx.json")),
         ("CI workflow exists", 10, exists(".github/workflows/ci.yml")),
-        ("CI runs required commands", 10, all(cmd in read(".github/workflows/ci.yml") for cmd in ["npm test", "npm run build", "npm run test:contracts", "npm run demo", "npm run evaluate", "npm audit"])),
+        ("CI runs required commands", 10, all(cmd in read(".github/workflows/ci.yml") for cmd in ["npm test", "npm run build", "npm run test:contracts", "npm run demo", "npm run deploy:local", "npm run evaluate", "npm audit"])),
         ("Contest documentation exists", 8, all(exists(p) for p in ["docs/demo-script.md", "docs/architecture.md", "docs/security.md", "docs/demo-log.txt", "docs/final-submission-checklist.md"])),
         ("README includes exact commands and web preview", 10, all(cmd in read("README.md") for cmd in ["npm test", "npm run build", "npm run test:contracts", "npm run demo", "npm run evaluate", "npm audit", "python3 -m http.server 4173 --directory web"])),
         ("Final DOCX verification text has no blank placeholders when available", 6, final_docx_has_no_blanks_when_available()),

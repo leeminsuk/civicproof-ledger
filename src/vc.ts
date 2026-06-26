@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import * as ed25519 from '@noble/ed25519';
+import { canonicalize } from 'json-canonicalize';
 
 ed25519.etc.sha512Sync = (...messages: Uint8Array[]): Uint8Array =>
   createHash('sha512')
@@ -152,7 +153,7 @@ export async function verifyCredential(
 }
 
 export function canonicalizeCredentialForSigning(value: unknown): string {
-  return JSON.stringify(sortForCanonicalJson(value));
+  return canonicalize(removeUndefined(value));
 }
 
 function unsignedCredential(credential: CivicProofCredential): unknown {
@@ -165,17 +166,16 @@ function unsignedCredential(credential: CivicProofCredential): unknown {
   };
 }
 
-function sortForCanonicalJson(value: unknown): unknown {
+function removeUndefined(value: unknown): unknown {
   if (Array.isArray(value)) {
-    return value.map((entry) => sortForCanonicalJson(entry));
+    return value.map((entry) => removeUndefined(entry));
   }
 
   if (value && typeof value === 'object') {
     return Object.fromEntries(
       Object.entries(value as Record<string, unknown>)
         .filter(([, entry]) => entry !== undefined)
-        .sort(([left], [right]) => left.localeCompare(right))
-        .map(([key, entry]) => [key, sortForCanonicalJson(entry)])
+        .map(([key, entry]) => [key, removeUndefined(entry)])
     );
   }
 

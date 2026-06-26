@@ -18,5 +18,6 @@ jobs:
       - run: npm run build
       - run: npm run test:contracts
       - run: npm run demo
+      - run: npm run deploy:local
       - run: npm run evaluate
       - run: npm audit

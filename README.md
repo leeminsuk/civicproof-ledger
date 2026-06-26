@@ -8,12 +8,15 @@ This repository provides:
 
 - Deterministic, program-scoped nullifier hashing with no raw personal data in the public identifier.
 - An in-memory claim registry that accepts first claims, rejects duplicates, and exposes audit events plus summary stats.
-- Demo Ed25519-signed verifiable credential issue and verify helpers using `@noble/ed25519`.
+- Demo Ed25519-signed verifiable credential issue and verify helpers using `@noble/ed25519` with RFC8785-compatible JSON canonicalization via `json-canonicalize`.
+- A Merkle inclusion proof helper for nullifier audit reproducibility. This is intentionally labeled as an inclusion proof, not a zero-knowledge proof.
+- A dependency-light Schnorr-style non-interactive proof demo (`src/zkProof.ts`) that proves knowledge of a nullifier secret without placing the subject secret in the proof object. Production should still replace this with audited Semaphore/Noir circuits.
 - A static verifier and public audit UI under `web/`.
 - A Solidity `ClaimRegistry` with owner-managed issuer allowlist, authorized issuer checks, ownership transfer for multisig/governance migration, program-level duplicate counters, and zero-value input validation.
 - Hardhat tests for deployment, issuer role-based access control, ownership transfer, duplicate detection, program-level duplicate accounting, and read paths.
 - A demo CLI scenario with two accepted claims and one duplicate rejection.
 - A contest harness that checks tests, CI, SBOM, Pages workflow, safe web rendering, and final DOCX placeholder hygiene.
+- A local deployment script, `npm run deploy:local`, with a checked deployment artifact under `docs/deployments/`.
 
 The credential proof type is `Ed25519Signature2020Demo`. It demonstrates canonical JSON signing and verification, not full production W3C VC compliance.
 
@@ -25,6 +28,7 @@ npm test
 npm run build
 npm run test:contracts
 npm run demo
+npm run deploy:local
 npm run evaluate
 npm audit
 ```

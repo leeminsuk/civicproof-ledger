@@ -55,8 +55,9 @@ describe('verifiable credential envelope', () => {
     })).toEqual({ valid: true });
   });
 
-  it('canonicalizes object keys deterministically before signing', async () => {
-    expect(canonicalizeCredentialForSigning({ b: 2, a: { d: 4, c: 3 } })).toBe('{"a":{"c":3,"d":4},"b":2}');
+  it('canonicalizes object keys deterministically before signing with RFC 8785-compatible JCS', async () => {
+    expect(canonicalizeCredentialForSigning({ b: 2, a: { d: 4, c: 3 }, skip: undefined })).toBe('{"a":{"c":3,"d":4},"b":2}');
+    expect(canonicalizeCredentialForSigning({ text: '한글', arr: [{ z: 1, a: 2 }] })).toBe('{"arr":[{"a":2,"z":1}],"text":"한글"}');
   });
 
   it('detects tampering after issuance', async () => {

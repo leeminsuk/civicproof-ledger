@@ -6,11 +6,15 @@ CivicProof Ledger demonstrates commitment-based duplicate-benefit detection for 
 
 - `src/ledger.ts` provides deterministic, program-scoped nullifier hashing and an in-memory audit registry for demo and tests.
 - `src/vc.ts` issues and verifies demo Ed25519-signed verifiable credential envelopes using `@noble/ed25519` and canonical JSON.
+- `src/vc.ts` now delegates signing serialization to `json-canonicalize` for RFC8785-compatible JSON canonicalization instead of relying on a homegrown key sorter.
+- `src/nullifierProof.ts` builds and verifies Merkle inclusion proofs for audit reproducibility. It does not claim ZK anonymity; it documents the bridge toward Semaphore/Noir-style proofs.
+- `src/zkProof.ts` adds an executable Schnorr-style NIZK demo proof. It proves knowledge of a secret linked to a program nullifier without serializing the subject identifier, while preserving a clear production warning to replace it with audited Semaphore/Noir circuits.
 - `contracts/ClaimRegistry.sol` stores public nullifier commitments by program on an EVM-compatible registry, emits audit events, enforces an owner-managed issuer allowlist before accepting claim registration, supports ownership transfer for multisig/governance migration, and exposes per-program duplicate counters.
 - `tests/contracts/ClaimRegistry.test.js` verifies deployer authorization, owner-only issuer updates, ownership transfer, authorized issuer registration, unauthorized rejection, duplicate accounting, program-level duplicate counts, program isolation, and invalid-input reverts.
 - `web/` is a static verifier and audit UI. It uses no React runtime, avoids `innerHTML`, and exercises pure verifier state in Vitest.
 - `.github/workflows/pages.yml` publishes `web/` to GitHub Pages on pushes to `main`.
 - `harness/evaluate_submission.py` scores contest-readiness artifacts and guards against regression to unsigned proofs, unsafe web rendering, missing issuer access control, missing Pages deployment, and stale final DOCX placeholders.
+- `scripts/deploy-claim-registry.js` provides a reproducible Hardhat deployment path; `docs/deployments/local-hardhat-claim-registry.json` records the local proof-of-deploy artifact.
 
 ## Data Flow
 
