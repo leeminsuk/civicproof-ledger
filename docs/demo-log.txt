@@ -1,12 +1,24 @@
-
-> civicproof-ledger@0.1.0 demo
-> tsx src/demo.ts
-
-CivicProof Ledger demo
 Accepted claims: 2
 Duplicate attempts: 1
 Programs represented: 2
 PII stored on-chain: 0 fields
+Replay verification: MATCH (state root 0x5615800ddae3df29...)
+Civic Integrity Index: 100/100 EXCELLENT
 ClaimRegistered osscontest-2026 0xd47c663026e211c0530b47229380f78237c9769c1dfcb6d13e120898adf68368
 DuplicateDetected osscontest-2026 0xd47c663026e211c0530b47229380f78237c9769c1dfcb6d13e120898adf68368
 ClaimRegistered scholarship-2026 0xc5689ae35629d1efd88a0d2b7e2f7ceafceee22216b5440b0db943a750bbc59f
+---
+CivicProof Red-Team Attack Corpus (civicproof-redteam-v1)
+BLOCKED ATK-01 [credential] Credential field tamper (commitment swap after signing)
+BLOCKED ATK-02 [credential] Signature stripping (empty proofValue)
+BLOCKED ATK-03 [credential] Issuer key forgery (attacker signs with own key, claims real DID)
+BLOCKED ATK-04 [credential] Wrong issuer DID substitution
+BLOCKED ATK-05 [credential] Expired credential replay
+BLOCKED ATK-06 [ledger] Same-program nullifier replay (duplicate benefit attempt)
+BLOCKED ATK-07 [privacy] Cross-program linkage (correlate one citizen across programs)
+BLOCKED ATK-08 [ledger] Malformed nullifier injection (short hash)
+BLOCKED ATK-09 [proof] Schnorr proof forgery (mutated response scalar)
+BLOCKED ATK-10 [proof] Schnorr proof cross-program replay (reuse proof in another program)
+BLOCKED ATK-11 [proof] Merkle membership forgery (swapped sibling path)
+BLOCKED ATK-12 [audit-log] Audit-log forgery (injected duplicate event with no registered claim)
+Blocked 12/12 attacks
