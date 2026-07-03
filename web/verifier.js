@@ -143,8 +143,8 @@ export async function demoScenario() {
   };
 }
 
-async function issueDemoCredential(input) {
-  const issuedAt = '2026-06-23T00:00:00.000Z';
+export async function issueDemoCredential(input) {
+  const issuedAt = input.issuedAt ?? '2026-06-23T00:00:00.000Z';
   const credential = {
     '@context': [
       'https://www.w3.org/2018/credentials/v1',
@@ -177,7 +177,7 @@ async function issueDemoCredential(input) {
   return credential;
 }
 
-async function verifySignedCredential(credential, options) {
+export async function verifySignedCredential(credential, options) {
   if (!credential || credential.issuer !== options.issuerDid) {
     return { valid: false, reason: 'WRONG_ISSUER' };
   }
@@ -210,11 +210,11 @@ async function verifySignedCredential(credential, options) {
   return verified ? { valid: true } : { valid: false, reason: 'TAMPERED' };
 }
 
-function canonicalizeCredentialForSigning(value) {
+export function canonicalizeCredentialForSigning(value) {
   return JSON.stringify(sortForCanonicalJson(value));
 }
 
-function unsignedCredential(credential) {
+export function unsignedCredential(credential) {
   return {
     ...credential,
     proof: {
@@ -239,9 +239,20 @@ function sortForCanonicalJson(value) {
   return value;
 }
 
-async function sha256Hex(value) {
+export async function sha256Hex(value) {
   const digest = await globalThis.crypto.subtle.digest('SHA-256', encoder.encode(`civicproof:nullifier:v1\0${value}`));
   return `0x${bytesToHex(new Uint8Array(digest))}`;
+}
+
+// Program-scoped nullifier: programId is part of the preimage so the same
+// citizen yields a different identifier in every program (no cross-tracking).
+export async function programNullifier(programId, subjectId, salt) {
+  return sha256Hex(`${programId}\0${subjectId}\0${salt}`);
+}
+
+export function shortHex(value, head = 10, tail = 6) {
+  if (typeof value !== 'string' || value.length <= head + tail + 2) return value;
+  return `${value.slice(0, head)}…${value.slice(-tail)}`;
 }
 
 function resultMessage(status) {

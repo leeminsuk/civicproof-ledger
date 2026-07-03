@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CivicProof Ledger Verifier</title>
+    <title>CivicProof Ledger — 개인정보 비공개 중복수혜 검증</title>
+    <meta name="color-scheme" content="dark">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%232f6f4f'/%3E%3Cpath d='M5 8.2l2 2 4-4.4' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="./styles.css">
     <script type="importmap">
@@ -16,44 +17,110 @@
   </head>
   <body>
     <main class="shell">
+      <!-- ACT 1 — HERO -->
       <section class="hero">
-        <div>
-          <p class="eyebrow">CivicProof Ledger</p>
-          <h1>Signed duplicate-benefit verification</h1>
-          <p class="lede">Paste a demo Ed25519 credential, check its signature, and compare it with the public audit trail.</p>
-        </div>
-        <div id="result-panel" class="result normal">
-          <strong>NORMAL</strong>
-          <span>Ready.</span>
+        <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+        <div class="hero-body">
+          <p class="eyebrow">CivicProof Ledger · 2026 오픈소스 개발자대회</p>
+          <h1>개인정보를 숨긴 채<br>중복수혜를 검증한다</h1>
+          <p class="lede">
+            공모전·장학금·복지 바우처의 중복 신청을 기관 간 원본 개인정보 공유 없이 걸러냅니다.
+            공개 원장에는 프로그램별 널리파이어와 서명 증빙만 남고, 누구나 장부를 재검산해
+            <strong>시민 무결성 지수</strong>로 사업 건전성을 확인할 수 있습니다.
+          </p>
+          <div class="kpi-row">
+            <div class="kpi"><span id="kpi-accepted">0</span><small>수리된 신청</small></div>
+            <div class="kpi"><span id="kpi-duplicate">0</span><small>차단된 중복</small></div>
+            <div class="kpi"><span id="kpi-programs">0</span><small>사업 수</small></div>
+            <div class="kpi kpi-privacy"><span id="kpi-pii">0</span><small>온체인 개인정보 필드</small></div>
+          </div>
+          <div class="hero-cta">
+            <button id="play-scenario" class="btn btn-primary" type="button">▶ 시나리오 자동 재생</button>
+            <a class="btn btn-ghost" href="https://github.com/leeminsuk/civicproof-ledger" target="_blank" rel="noopener">소스코드 (Apache-2.0)</a>
+          </div>
         </div>
       </section>
 
-      <section class="grid">
-        <article class="panel verifier">
-          <div class="panel-header">
-            <h2>Verifier</h2>
-            <button id="load-demo-button" type="button">Load demo</button>
+      <!-- ACT 2 — LEDGER SIMULATOR -->
+      <section class="panel" id="simulator">
+        <div class="panel-head">
+          <div>
+            <p class="kicker">직접 해보기 · 원장 시뮬레이터</p>
+            <h2>시민이 사업에 신청하면 원장은 이렇게 반응합니다</h2>
           </div>
-          <textarea id="credential-json" spellcheck="false" aria-label="Credential JSON"></textarea>
-          <button id="verify-button" class="primary" type="button">Verify credential</button>
-        </article>
-
-        <article class="panel">
-          <div class="panel-header">
-            <h2>Public Audit</h2>
+          <button id="reset-sim" class="btn btn-small" type="button">초기화</button>
+        </div>
+        <p class="hint">아래에서 <b>시민 × 사업</b>을 눌러 신청을 발생시켜 보세요. 같은 시민이 같은 사업에 다시 신청하면 <b>차단</b>되고, 다른 사업에 신청하면 <b>다른 널리파이어</b>가 생겨 교차추적이 불가능합니다.</p>
+        <div class="sim-grid">
+          <div class="apply-board" id="apply-board"><!-- built by app.js --></div>
+          <div class="ledger-column">
+            <div class="ledger-head"><h3>공개 감사 로그</h3><span id="ledger-count" class="pill">0건</span></div>
+            <ol id="ledger" class="ledger" aria-live="polite"><!-- events --></ol>
+            <div id="last-result" class="last-result" hidden>
+              <span class="lr-badge"></span>
+              <span class="lr-text"></span>
+              <code class="lr-nullifier"></code>
+            </div>
           </div>
-          <div class="metrics">
-            <div><span id="accepted-claims">0</span><small>Accepted</small></div>
-            <div><span id="duplicate-attempts">0</span><small>Duplicates</small></div>
-            <div><span id="programs">0</span><small>Programs</small></div>
-            <div><span id="pii-fields">0</span><small>PII fields</small></div>
-            <div><span id="integrity-score">-</span><small>Integrity</small></div>
-          </div>
-          <p id="integrity-line" class="audit-line">Civic Integrity Index pending.</p>
-          <p id="replay-status" class="audit-line">Replay verification pending.</p>
-          <ol id="timeline" class="timeline"></ol>
-        </article>
+        </div>
       </section>
+
+      <!-- ACT 3 — ATTACK THEATER -->
+      <section class="panel" id="attacks">
+        <div class="panel-head">
+          <div>
+            <p class="kicker">공격 방어 시연 · 레드팀 코퍼스</p>
+            <h2>“공격자가 이렇게 하면요?” — 12종을 브라우저에서 실제로 실행</h2>
+          </div>
+          <button id="run-attacks" class="btn btn-primary" type="button">공격 12종 실행</button>
+        </div>
+        <p class="hint">각 카드는 실제 Ed25519 검증·널리파이어 규칙·증명 검산을 브라우저에서 <b>실시간 실행</b>한 결과입니다. 시연이 아니라 코드가 막습니다.</p>
+        <div class="attack-summary" id="attack-summary" hidden>
+          <span id="attack-score" class="attack-score">0 / 12</span>
+          <span class="attack-caption">차단됨</span>
+        </div>
+        <div id="attack-grid" class="attack-grid"><!-- attack cards --></div>
+      </section>
+
+      <!-- ACT 4 — INTEGRITY DASHBOARD -->
+      <section class="panel" id="dashboard">
+        <div class="panel-head">
+          <div>
+            <p class="kicker">무결성 대시보드 · Replay-Verify + CII</p>
+            <h2>장부를 믿지 말고 다시 계산하라</h2>
+          </div>
+          <label class="tamper-toggle">
+            <input type="checkbox" id="tamper-switch">
+            <span>감사 로그 조작 시뮬레이션</span>
+          </label>
+        </div>
+        <div class="dash-grid">
+          <div class="gauge-card">
+            <svg id="gauge" viewBox="0 0 200 200" class="gauge" role="img" aria-label="Civic Integrity Index"></svg>
+            <div class="gauge-label"><span id="gauge-grade" class="grade">—</span><small>Civic Integrity Index (cii-v1)</small></div>
+          </div>
+          <div class="subscore-card">
+            <h3>지수 구성</h3>
+            <div id="subscores" class="subscores"><!-- bars --></div>
+          </div>
+          <div class="replay-card">
+            <h3>Replay-Verify</h3>
+            <div id="replay-badge" class="replay-badge">—</div>
+            <p id="replay-text" class="replay-text">이벤트 로그로 원장 상태를 재구축해 대조합니다.</p>
+            <div class="root-row"><small>상태 루트</small><code id="state-root">—</code></div>
+            <ul id="divergences" class="divergences"></ul>
+          </div>
+          <div class="program-card">
+            <h3>사업별 중복 압력</h3>
+            <div id="program-pressure" class="program-pressure"><!-- bars --></div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <span>CivicProof Ledger · Apache-2.0 · 온체인 개인정보 0필드</span>
+        <span>모든 판정은 결정적 코드 · 자동 테스트 검증</span>
+      </footer>
     </main>
     <script type="module" src="./app.js"></script>
   </body>

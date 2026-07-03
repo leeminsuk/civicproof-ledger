@@ -17,7 +17,7 @@ This repository provides:
 - Demo Ed25519-signed verifiable credential issue and verify helpers using `@noble/ed25519` with RFC8785-compatible JSON canonicalization via `json-canonicalize`.
 - A Merkle inclusion proof helper for nullifier audit reproducibility. This is intentionally labeled as an inclusion proof, not a zero-knowledge proof.
 - A dependency-light Schnorr-style non-interactive proof demo (`src/zkProof.ts`) that proves knowledge of a nullifier secret without placing the subject secret in the proof object. Production should still replace this with audited Semaphore/Noir circuits.
-- A static verifier and public audit UI under `web/`.
+- An interactive single-page demo under `web/` (civic dark dashboard, self-contained, GitHub Pages-ready) with four acts: an animated hero, a hands-on **ledger simulator** (click citizen × program to see accept/duplicate/cross-program-unlinkability live), an **attack theater** that runs all 12 red-team scenarios in the browser, and an **integrity dashboard** with a Civic Integrity Index gauge, Replay-Verify status, and a "tamper the audit log" toggle that drops the score in real time.
 - A Solidity `ClaimRegistry` with owner-managed issuer allowlist, authorized issuer checks, ownership transfer for multisig/governance migration, program-level duplicate counters, and zero-value input validation.
 - Hardhat tests for deployment, issuer role-based access control, ownership transfer, duplicate detection, program-level duplicate accounting, and read paths.
 - A demo CLI scenario with two accepted claims and one duplicate rejection, ending with a Replay-Verify MATCH and a Civic Integrity Index of 100/100 EXCELLENT.
