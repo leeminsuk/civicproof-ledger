@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CivicProof Ledger Verifier</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%232f6f4f'/%3E%3Cpath d='M5 8.2l2 2 4-4.4' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="./styles.css">
     <script type="importmap">
       {
         "imports": {
-          "@noble/ed25519": "../node_modules/@noble/ed25519/index.js"
+          "@noble/ed25519": "./vendor/noble-ed25519.js"
         }
       }
     </script>
@@ -46,7 +47,10 @@
             <div><span id="duplicate-attempts">0</span><small>Duplicates</small></div>
             <div><span id="programs">0</span><small>Programs</small></div>
             <div><span id="pii-fields">0</span><small>PII fields</small></div>
+            <div><span id="integrity-score">-</span><small>Integrity</small></div>
           </div>
+          <p id="integrity-line" class="audit-line">Civic Integrity Index pending.</p>
+          <p id="replay-status" class="audit-line">Replay verification pending.</p>
           <ol id="timeline" class="timeline"></ol>
         </article>
       </section>

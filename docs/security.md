@@ -38,3 +38,15 @@ For production, the deployer should call `transferOwnership(multisig)` before on
 ## Non-Goals
 
 This repository does not claim production W3C VC compliance, DID resolution, secure issuer key custody, zero-knowledge proof generation, or privacy against weak salts. Production use would require formal threat modeling, DID/key management, replay rules, monitoring, independent cryptographic review, and a formal issuer onboarding policy.
+
+
+## Adversarial verification
+
+`npm run redteam` executes the Red-Team Attack Corpus (`src/attackCorpus.ts`):
+12 attack scenarios across credential, ledger, proof, audit-log, and privacy
+categories, each mapped to the defense that must block it. The command and
+its Vitest twin (`tests/attackCorpus.test.ts`) fail unless 100% of attacks
+are blocked, so security regressions cannot land silently. Audit-log
+integrity is additionally protected by the Replay-Verify Engine
+(`src/replay.ts`), which re-derives ledger state from public events and
+reports typed divergences instead of trusting stored counters.

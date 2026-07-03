@@ -218,6 +218,15 @@ button.primary {
   font-size: 0.86rem;
 }
 
+.audit-line {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.62);
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
 @media (max-width: 820px) {
   .hero,
   .grid {

@@ -10,6 +10,7 @@
     "test:contracts": "hardhat test",
     "evaluate": "python3 harness/evaluate_submission.py",
     "demo": "tsx src/demo.ts",
+    "redteam": "tsx src/attackCorpus.ts",
     "deploy:local": "hardhat run scripts/deploy-claim-registry.js",
     "start": "tsx src/demo.ts"
   },
