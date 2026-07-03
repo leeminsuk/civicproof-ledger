@@ -37,3 +37,31 @@ export function demoScenario(): Promise<{
   metrics: WebAuditMetrics;
   sampleCredentialJson: string;
 }>;
+
+export interface WebReplayResult {
+  match: boolean;
+  derived: WebAuditMetrics;
+  orderViolations: string[];
+}
+
+export interface WebIntegrityIndex {
+  formula: 'cii-v1';
+  score: number;
+  grade: 'EXCELLENT' | 'GOOD' | 'WATCH' | 'ALERT';
+  subscores: {
+    auditConsistency: number;
+    duplicateContainment: number;
+    credentialIntegrity: number;
+    privacyMinimization: number;
+  };
+}
+
+export function replayFromEvents(events: AuditEvent[], claimedMetrics: WebAuditMetrics): WebReplayResult;
+export function computeIntegrityIndex(
+  events: AuditEvent[],
+  options: {
+    replayMatch: boolean;
+    credentialChecks: { total: number; validSignatures: number };
+    piiFieldsOnLedger: number;
+  }
+): WebIntegrityIndex;

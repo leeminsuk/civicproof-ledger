@@ -1,4 +1,4 @@
-import { demoIssuer, demoScenario, verifyCredentialPaste } from './verifier.js';
+import { computeIntegrityIndex, demoIssuer, demoScenario, replayFromEvents, verifyCredentialPaste } from './verifier.js';
 
 const state = {
   seenNullifiers: new Set()
@@ -14,12 +14,16 @@ const metrics = {
   programs: document.querySelector('#programs'),
   piiFieldsStored: document.querySelector('#pii-fields')
 };
+const integrityScore = document.querySelector('#integrity-score');
+const integrityLine = document.querySelector('#integrity-line');
+const replayStatus = document.querySelector('#replay-status');
 const timeline = document.querySelector('#timeline');
 
 async function boot() {
   const scenario = await demoScenario();
   credentialInput.value = scenario.sampleCredentialJson;
   renderMetrics(scenario.metrics);
+  renderAuditProofs(scenario);
   renderTimeline(scenario.events);
   renderResult({ status: 'normal', message: 'Paste a credential or load the demo scenario.' });
 
@@ -28,6 +32,7 @@ async function boot() {
     state.seenNullifiers = new Set();
     credentialInput.value = next.sampleCredentialJson;
     renderMetrics(next.metrics);
+    renderAuditProofs(next);
     renderTimeline(next.events);
     renderResult({ status: 'normal', message: 'Demo credential loaded.' });
   });
@@ -48,6 +53,24 @@ function renderMetrics(nextMetrics) {
   metrics.duplicateAttempts.textContent = String(nextMetrics.duplicateAttempts);
   metrics.programs.textContent = String(nextMetrics.programs);
   metrics.piiFieldsStored.textContent = String(nextMetrics.piiFieldsStored);
+}
+
+function renderAuditProofs(scenario) {
+  const replay = replayFromEvents(scenario.events, scenario.metrics);
+  const index = computeIntegrityIndex(scenario.events, {
+    replayMatch: replay.match,
+    credentialChecks: {
+      total: scenario.verifierResults.length,
+      validSignatures: scenario.verifierResults.filter((entry) => entry.status !== 'tampered').length
+    },
+    piiFieldsOnLedger: scenario.metrics.piiFieldsStored
+  });
+
+  integrityScore.textContent = String(index.score);
+  integrityLine.textContent = `Civic Integrity Index ${index.score}/100 ${index.grade} — audit ${index.subscores.auditConsistency}/40, containment ${index.subscores.duplicateContainment}/30, credential ${index.subscores.credentialIntegrity}/20, privacy ${index.subscores.privacyMinimization}/10 (cii-v1).`;
+  replayStatus.textContent = replay.match
+    ? `Replay verification MATCH — ${replay.derived.acceptedClaims} accepted, ${replay.derived.duplicateAttempts} duplicates re-derived from the event log alone.`
+    : `Replay verification DIVERGED — ${replay.orderViolations.length} order violations detected.`;
 }
 
 function renderTimeline(events) {

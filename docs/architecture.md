@@ -34,3 +34,45 @@ CivicProof Ledger demonstrates commitment-based duplicate-benefit detection for 
 - Production deployments should immediately transfer `owner` to a multisig or governance account via `transferOwnership`. The transfer revokes the previous owner issuer flag and authorizes the new owner, then later issuer authorization can be rotated when an agency key is compromised.
 
 The VC proof type is explicit: `Ed25519Signature2020Demo`. It is a contest demo proof and is not represented as full W3C production compliance.
+
+
+## Integrity Engines (differentiator layer)
+
+### Replay-Verify Engine (`src/replay.ts`)
+
+The public audit-event log is the single source of truth. `replayAuditEvents`
+folds the log into claims, per-program counters, and a domain-separated
+SHA-256 state root (`civicproof:state-root:v1`, order-independent).
+`verifyLedgerReplay` compares that replayed state with the live ledger
+snapshot and emits typed divergences:
+
+| Divergence | Detected manipulation |
+| --- | --- |
+| `TOTAL_CLAIMS_MISMATCH` / `DUPLICATE_ATTEMPTS_MISMATCH` / `PROGRAM_COUNT_MISMATCH` | Counter tampering |
+| `CLAIM_MISSING_IN_LIVE` | Deleted claims |
+| `CLAIM_NOT_IN_REPLAY` | Claims smuggled in without audit events |
+| `COMMITMENT_MISMATCH` | Post-hoc commitment swaps |
+| `EVENT_ORDER_VIOLATION` | Forged duplicate events with no prior registration |
+| `STATE_ROOT_MISMATCH` | Any residual state divergence |
+
+The same replay runs against the EVM layer: a Hardhat test queries
+`ClaimRegistered`/`DuplicateDetected` events and reproduces `totalClaims`,
+`duplicateAttempts`, and both per-program counters exactly.
+
+### Civic Integrity Index (`src/integrityIndex.ts`, formula `cii-v1`)
+
+Deterministic 0-100 score with frozen weights: audit consistency 40 (replay
+MATCH), duplicate containment 30 (every duplicate attempt rejected with an
+audit event), credential integrity 20 (valid-signature share), privacy
+minimization 10 (zero PII fields on the public ledger). Grades: >=90
+EXCELLENT, >=75 GOOD, >=50 WATCH, else ALERT. The browser mirror in
+`web/verifier.js` reproduces the identical score client-side.
+
+### Red-Team Attack Corpus (`src/attackCorpus.ts`)
+
+Twelve adversarial scenarios (ATK-01..ATK-12) covering credential tampering,
+signature stripping, issuer key forgery, DID substitution, expired replay,
+same-program nullifier replay, cross-program linkage, malformed input
+injection, Schnorr forgery and cross-program proof replay, Merkle path
+forgery, and audit-log forgery. `npm run redteam` exits non-zero unless
+12/12 are blocked, and CI runs it on every push.

@@ -41,6 +41,50 @@ export function buildAuditMetrics(events) {
   };
 }
 
+// Browser mirror of src/replay.ts: re-derive audit metrics purely from the
+// event log and compare them with the metrics the ledger claims to have.
+export function replayFromEvents(events, claimedMetrics) {
+  const derived = buildAuditMetrics(events);
+  const seen = new Set();
+  const orderViolations = [];
+  for (const event of events) {
+    const key = `${event.programId}:${event.nullifierHash.toLowerCase()}`;
+    if (event.accepted) {
+      seen.add(key);
+    } else if (!seen.has(key)) {
+      orderViolations.push(key);
+    }
+  }
+  const match =
+    orderViolations.length === 0 &&
+    derived.acceptedClaims === claimedMetrics.acceptedClaims &&
+    derived.duplicateAttempts === claimedMetrics.duplicateAttempts &&
+    derived.programs === claimedMetrics.programs;
+  return { match, derived, orderViolations };
+}
+
+// Browser mirror of src/integrityIndex.ts (cii-v1): deterministic weights,
+// no randomness, identical grades to the Node implementation.
+export function computeIntegrityIndex(events, options) {
+  const duplicates = events.filter((event) => !event.accepted);
+  const blockedDuplicates = duplicates.filter((event) => event.reason === 'DUPLICATE_CLAIM');
+  const auditConsistency = options.replayMatch ? 40 : 0;
+  const duplicateContainment =
+    duplicates.length === 0 ? 30 : Math.round(30 * (blockedDuplicates.length / duplicates.length));
+  const credentialIntegrity =
+    options.credentialChecks.total === 0
+      ? 20
+      : Math.round(20 * (options.credentialChecks.validSignatures / options.credentialChecks.total));
+  const privacyMinimization = options.piiFieldsOnLedger === 0 ? 10 : 0;
+  const score = auditConsistency + duplicateContainment + credentialIntegrity + privacyMinimization;
+  return {
+    formula: 'cii-v1',
+    score,
+    grade: score >= 90 ? 'EXCELLENT' : score >= 75 ? 'GOOD' : score >= 50 ? 'WATCH' : 'ALERT',
+    subscores: { auditConsistency, duplicateContainment, credentialIntegrity, privacyMinimization }
+  };
+}
+
 export async function demoScenario() {
   const first = await issueDemoCredential({
     subjectDid: 'did:key:alice-redacted',

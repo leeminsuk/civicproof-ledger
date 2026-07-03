@@ -1,6 +1,8 @@
 import { Command } from 'commander';
 import { createNullifier, InMemoryClaimRegistry, type AuditEvent, type RegistryStats } from './ledger.js';
 import { deterministicTestKeyPair, issueCredential, verifyCredential, type CivicProofCredential } from './vc.js';
+import { verifyLedgerReplay, type ReplayVerification } from './replay.js';
+import { computeIntegrityIndex, type IntegrityIndex } from './integrityIndex.js';
 
 export interface DemoVerifierResult {
   status: 'normal' | 'duplicate' | 'expired' | 'tampered';
@@ -12,6 +14,8 @@ export interface DemoScenarioResult {
   events: AuditEvent[];
   credentials: CivicProofCredential[];
   verifierResults: DemoVerifierResult[];
+  replayVerification: ReplayVerification;
+  integrityIndex: IntegrityIndex;
   publicAuditSummary: string;
 }
 
@@ -94,17 +98,35 @@ export async function runDemoScenario(): Promise<DemoScenarioResult> {
   }
 
   const stats = registry.stats();
+  const events = registry.auditEvents();
+  const replayVerification = verifyLedgerReplay(events, {
+    claims: registry.allClaims(),
+    stats
+  });
+  const integrityIndex = computeIntegrityIndex({
+    events,
+    replayMatch: replayVerification.match,
+    credentialChecks: {
+      total: verifierResults.length,
+      validSignatures: verifierResults.filter((entry) => entry.status !== 'tampered').length
+    },
+    piiFieldsOnLedger: 0
+  });
 
   return {
     stats,
-    events: registry.auditEvents(),
+    events,
     credentials,
     verifierResults,
+    replayVerification,
+    integrityIndex,
     publicAuditSummary: [
       `Accepted claims: ${stats.totalClaims}`,
       `Duplicate attempts: ${stats.duplicateAttempts}`,
       `Programs represented: ${stats.programs}`,
-      'PII stored on-chain: 0 fields'
+      'PII stored on-chain: 0 fields',
+      `Replay verification: ${replayVerification.match ? 'MATCH' : 'DIVERGED'} (state root ${replayVerification.replayedStateRoot.slice(0, 18)}...)`,
+      `Civic Integrity Index: ${integrityIndex.score}/100 ${integrityIndex.grade}`
     ].join('\n')
   };
 }

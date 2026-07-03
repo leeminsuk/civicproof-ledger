@@ -99,6 +99,10 @@ export class InMemoryClaimRegistry {
     return claim ? { ...claim } : undefined;
   }
 
+  allClaims(): ClaimRecord[] {
+    return [...this.claims.values()].map((claim) => ({ ...claim }));
+  }
+
   stats(): RegistryStats {
     return {
       totalClaims: this.claims.size,

@@ -16,4 +16,22 @@ describe('demo scenario', () => {
     expect(result.credentials.every((credential) => credential.proof.type === 'Ed25519Signature2020Demo')).toBe(true);
     expect(result.verifierResults.map((entry) => entry.status)).toEqual(['normal', 'duplicate', 'normal']);
   });
+
+  it('replay-verifies the demo ledger and reports a MATCH state root', async () => {
+    const result = await runDemoScenario();
+
+    expect(result.replayVerification.match).toBe(true);
+    expect(result.replayVerification.divergences).toEqual([]);
+    expect(result.replayVerification.replayedStateRoot).toBe(result.replayVerification.liveStateRoot);
+    expect(result.publicAuditSummary).toContain('Replay verification: MATCH');
+  });
+
+  it('scores the demo ledger 100/100 EXCELLENT on the Civic Integrity Index', async () => {
+    const result = await runDemoScenario();
+
+    expect(result.integrityIndex.formula).toBe('cii-v1');
+    expect(result.integrityIndex.score).toBe(100);
+    expect(result.integrityIndex.grade).toBe('EXCELLENT');
+    expect(result.publicAuditSummary).toContain('Civic Integrity Index: 100/100 EXCELLENT');
+  });
 });
