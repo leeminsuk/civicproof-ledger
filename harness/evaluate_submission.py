@@ -73,7 +73,7 @@ def main() -> int:
         ("Signed VC implementation uses @noble/ed25519", 12, "@noble/ed25519" in read("src/vc.ts")),
         ("VC signing uses RFC8785-compatible JSON canonicalization dependency", 8, "json-canonicalize" in read("package.json") and "canonicalize(" in read("src/vc.ts")),
         ("Unsigned demo proof removed from production source and docs", 10, "UnsignedDemoProof" not in production_text()),
-        ("Vitest and contract test count >= 30", 12, count_tests() >= 30),
+        ("Vitest and contract test count >= 70", 12, count_tests() >= 70),
         ("Nullifier membership proof tests exist", 6, exists("src/nullifierProof.ts") and exists("tests/nullifierProof.test.ts")),
         ("Schnorr-style NIZK demo proof exists and is tested", 10, exists("src/zkProof.ts") and exists("tests/zkProof.test.ts") and "SchnorrNullifierNIZKDemo" in read("src/zkProof.ts")),
         ("Static verifier web UI exists", 10, all(exists(p) for p in ["web/index.html", "web/styles.css", "web/app.js", "web/verifier.js"])),
@@ -91,6 +91,12 @@ def main() -> int:
         ("CI runs required commands", 10, all(cmd in read(".github/workflows/ci.yml") for cmd in ["npm test", "npm run build", "npm run test:contracts", "npm run demo", "npm run deploy:local", "npm run evaluate", "npm audit"])),
         ("Contest documentation exists", 8, all(exists(p) for p in ["docs/demo-script.md", "docs/architecture.md", "docs/security.md", "docs/demo-log.txt", "docs/final-submission-checklist.md"])),
         ("README includes exact commands and web preview", 10, all(cmd in read("README.md") for cmd in ["npm test", "npm run build", "npm run test:contracts", "npm run demo", "npm run evaluate", "npm audit", "python3 -m http.server 4173 --directory web"])),
+        ("Replay-Verify Engine exists and is tested", 10, exists("src/replay.ts") and exists("tests/replay.test.ts") and "verifyLedgerReplay" in read("src/replay.ts")),
+        ("Civic Integrity Index (cii-v1) exists and is tested", 8, exists("src/integrityIndex.ts") and exists("tests/integrityIndex.test.ts") and "cii-v1" in read("src/integrityIndex.ts")),
+        ("Red-Team Attack Corpus exists, is tested, and wired as npm run redteam", 10, exists("src/attackCorpus.ts") and exists("tests/attackCorpus.test.ts") and 'redteam' in read("package.json")),
+        ("On-chain replay cross-check test exists", 6, "Replay-Verify" in read("tests/contracts/ClaimRegistry.test.js")),
+        ("Web verifier ships a vendored signature module (GitHub Pages safe)", 6, exists("web/vendor/noble-ed25519.js") and "./vendor/noble-ed25519.js" in read("web/index.html")),
+        ("CI runs the red-team corpus", 4, "npm run redteam" in read(".github/workflows/ci.yml")),
         ("Final DOCX verification text has no blank placeholders when available", 6, final_docx_has_no_blanks_when_available()),
     ]
 

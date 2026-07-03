@@ -235,6 +235,50 @@ describe('ClaimRegistry contract', function () {
     expect(claim.registeredAt).to.equal(0n);
     expect(await registry.claimStatus(programA, nullifier)).to.equal(0n);
   });
+
+  it('replays on-chain audit events into the exact contract counters (Replay-Verify)', async function () {
+    const { registry } = await deployRegistry();
+
+    await registry.registerClaim(programA, nullifier, commitmentA, 'ipfs://a-1');
+    await registry.registerClaim(programA, nullifier, commitmentB, 'ipfs://a-duplicate');
+    await registry.registerClaim(programB, nullifier, commitmentB, 'ipfs://b-1');
+
+    const registered = await registry.queryFilter(registry.filters.ClaimRegistered());
+    const duplicates = await registry.queryFilter(registry.filters.DuplicateDetected());
+
+    const replayed = {
+      claims: new Map(),
+      duplicateAttempts: 0,
+      perProgramClaims: new Map(),
+      perProgramDuplicates: new Map()
+    };
+    for (const event of registered) {
+      const key = `${event.args.programId}:${event.args.nullifierHash}`;
+      replayed.claims.set(key, event.args.commitmentHash);
+      replayed.perProgramClaims.set(
+        event.args.programId,
+        (replayed.perProgramClaims.get(event.args.programId) ?? 0) + 1
+      );
+    }
+    for (const event of duplicates) {
+      const key = `${event.args.programId}:${event.args.nullifierHash}`;
+      expect(replayed.claims.has(key), 'duplicate event must follow a registration').to.equal(true);
+      replayed.duplicateAttempts += 1;
+      replayed.perProgramDuplicates.set(
+        event.args.programId,
+        (replayed.perProgramDuplicates.get(event.args.programId) ?? 0) + 1
+      );
+    }
+
+    expect(await registry.totalClaims()).to.equal(BigInt(replayed.claims.size));
+    expect(await registry.duplicateAttempts()).to.equal(BigInt(replayed.duplicateAttempts));
+    expect(await registry.programClaimCounts(programA)).to.equal(BigInt(replayed.perProgramClaims.get(programA)));
+    expect(await registry.programClaimCounts(programB)).to.equal(BigInt(replayed.perProgramClaims.get(programB)));
+    expect(await registry.programDuplicateCounts(programA)).to.equal(BigInt(replayed.perProgramDuplicates.get(programA)));
+
+    const original = await registry.getClaim(programA, nullifier);
+    expect(original.commitmentHash, 'duplicate must never overwrite the original claim').to.equal(commitmentA);
+  });
 });
 
 async function expectRevertedWith(promise, expectedName) {
