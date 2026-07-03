@@ -76,3 +76,28 @@ same-program nullifier replay, cross-program linkage, malformed input
 injection, Schnorr forgery and cross-program proof replay, Merkle path
 forgery, and audit-log forgery. `npm run redteam` exits non-zero unless
 12/12 are blocked, and CI runs it on every push.
+
+
+## Interactive demo (web/)
+
+The published site is a four-act civic dashboard, fully self-contained for
+GitHub Pages (vendored `web/vendor/noble-ed25519.js`, no external hosts):
+
+1. **Hero** — a canvas animation of anonymized identities passing through a
+   hashing shield into program-scoped nullifiers, plus live KPI counters.
+2. **Ledger simulator** (`web/demoEngine.js`) — click citizen × program to
+   register applications. Same-program repeats are blocked; the same citizen in
+   different programs produces different nullifiers (no cross-tracking). A
+   scripted auto-play tells the whole story hands-free.
+3. **Attack theater** — runs all 12 red-team scenarios (`runAttackCorpus`) live
+   in the browser using real Ed25519 verification and the browser proof mirrors
+   (`web/proofs.js`: Schnorr NIZK + Merkle), animating each to BLOCKED.
+4. **Integrity dashboard** — an SVG Civic Integrity Index gauge, subscore bars,
+   Replay-Verify status with state root, per-program duplicate pressure, and a
+   "tamper the audit log" toggle that injects a forged event and drops the
+   score to 60 WATCH with `EVENT_ORDER_VIOLATION`, then recovers.
+
+`web/demoEngine.js` and `web/proofs.js` are DOM-free pure logic, so the same
+code powers the UI and the Vitest suite (`tests/demoEngine.test.ts`,
+`tests/proofs.test.ts`). `web/app.js` builds every node via createElement +
+textContent (no raw-markup sink), keeping the pasted-content XSS boundary.

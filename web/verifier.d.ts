@@ -65,3 +65,20 @@ export function computeIntegrityIndex(
     piiFieldsOnLedger: number;
   }
 ): WebIntegrityIndex;
+
+export function programNullifier(programId: string, subjectId: string, salt: string): Promise<string>;
+export function shortHex(value: string, head?: number, tail?: number): string;
+export function issueDemoCredential(input: {
+  subjectDid: string;
+  programId: string;
+  nullifierHash: string;
+  commitmentHash: string;
+  expiresAt: string;
+  issuedAt?: string;
+}): Promise<CivicProofCredential>;
+export function verifySignedCredential(
+  credential: unknown,
+  options: { issuerDid: string; publicKeyHex: string; at?: Date }
+): Promise<{ valid: true } | { valid: false; reason: string }>;
+export function canonicalizeCredentialForSigning(value: unknown): string;
+export function unsignedCredential(credential: CivicProofCredential): unknown;
