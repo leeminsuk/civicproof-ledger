@@ -120,7 +120,7 @@ def main() -> int:
         ("CI runs the red-team corpus", 4, "npm run redteam" in read(".github/workflows/ci.yml")),
         ("Interactive ledger simulator exists and is tested", 8, exists("web/demoEngine.js") and exists("tests/demoEngine.test.ts") and "createSimulator" in read("web/demoEngine.js")),
         ("Browser proof mirrors (Schnorr + Merkle) exist and are tested", 6, exists("web/proofs.js") and exists("tests/proofs.test.ts") and "SchnorrNullifierNIZKDemo" in read("web/proofs.js")),
-        ("Interactive demo has hero canvas, attack theater, and tamper toggle", 6, all(token in read("web/index.html") for token in ["hero-canvas", "run-attacks", "tamper-switch", "play-scenario"])),
+        ("Interactive demo has hero canvas, attack theater, and tamper demo button", 6, all(token in read("web/index.html") for token in ["hero-canvas", "run-attacks", "tamper-demo", "play-scenario"])),
         ("Browser attack corpus and Node corpus both cover 12 scenarios", 6, "ATK-12" in read("web/demoEngine.js") and "ATK-12" in read("src/attackCorpus.ts")),
         ("Final DOCX verification text has no blank placeholders when available", 6, final_docx_has_no_blanks_when_available()),
         ("Open-source governance pack exists (CONTRIBUTING/CoC/SECURITY/NOTICE/CHANGELOG/CITATION)", 10, all(exists(p) for p in ["CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "SECURITY.md", "NOTICE", "CHANGELOG.md", "CITATION.cff"])),

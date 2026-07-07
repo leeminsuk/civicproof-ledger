@@ -122,7 +122,7 @@ $('#reset-sim').addEventListener('click', () => {
   ledger.replaceChildren();
   ledgerCount.textContent = '0건';
   lastResult.hidden = true;
-  $('#tamper-switch').checked = false;
+  dashboardEvents = () => sim.events;
   refreshMetricsAndDashboard();
 });
 
@@ -131,7 +131,7 @@ $('#play-scenario').addEventListener('click', async (event) => {
   button.disabled = true;
   sim.reset();
   ledger.replaceChildren();
-  $('#tamper-switch').checked = false;
+  dashboardEvents = () => sim.events;
   for (const step of SCRIPTED_SCENARIO) {
     await submit(step.citizenId, step.programId);
     await sleep(720);
@@ -324,9 +324,39 @@ function renderDashboard() {
   renderStateRoot(events);
 }
 
-$('#tamper-switch').addEventListener('change', (event) => {
-  dashboardEvents = event.currentTarget.checked ? () => tamperEvents(sim.events) : () => sim.events;
+// One-shot tamper demo: inject a forged audit event so the dashboard drops
+// (CII 100 EXCELLENT → 60 WATCH, Replay-Verify MATCH → DIVERGED), then let
+// Replay-Verify "catch" it and auto-recover to the clean state. No manual
+// toggle to reset — the button tells the whole story and returns on its own.
+const tamperBtn = $('#tamper-demo');
+const tamperLabel = tamperBtn.querySelector('.tamper-label');
+let tamperPlaying = false;
+
+tamperBtn.addEventListener('click', async () => {
+  if (tamperPlaying) return;
+  tamperPlaying = true;
+  tamperBtn.disabled = true;
+  tamperBtn.classList.add('playing');
+
+  // 1) inject the forged event → dashboard diverges
+  tamperLabel.textContent = '① 감사 로그 조작 주입 — 지수 하락';
+  dashboardEvents = () => tamperEvents(sim.events);
   renderDashboard();
+  await sleep(2400);
+
+  // 2) Replay-Verify detects the divergence and the state is recomputed clean
+  tamperBtn.classList.remove('playing');
+  tamperBtn.classList.add('recovering');
+  tamperLabel.textContent = '② Replay-Verify가 조작 탐지 → 복구';
+  dashboardEvents = () => sim.events;
+  renderDashboard();
+  await sleep(1500);
+
+  // 3) back to idle
+  tamperBtn.classList.remove('recovering');
+  tamperLabel.textContent = '감사 로그 조작 시뮬레이션';
+  tamperBtn.disabled = false;
+  tamperPlaying = false;
 });
 
 function sleep(ms) {
