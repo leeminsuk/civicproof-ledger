@@ -90,4 +90,50 @@ describe('audit-log tamper injection', () => {
     expect(forged.index.subscores.auditConsistency).toBe(0);
     expect(['WATCH', 'ALERT']).toContain(forged.index.grade);
   });
+
+  // Models the one-shot tamper-demo button: clean -> inject forgery -> auto-recover.
+  // The button drives exactly these three auditProofsFor() states in sequence.
+  it('recovers to a clean 100/MATCH state after the forged event is removed', async () => {
+    const sim = createSimulator();
+    for (const step of SCRIPTED_SCENARIO) {
+      await sim.submit(step.citizenId, step.programId);
+    }
+
+    const before = auditProofsFor(sim.events);
+    expect(before.index.score).toBe(100);
+    expect(before.replay.match).toBe(true);
+
+    const tampered = auditProofsFor(tamperEvents(sim.events));
+    expect(tampered.replay.match).toBe(false);
+    expect(tampered.index.grade).toBe('WATCH');
+
+    // Recovery re-reads sim.events (never the tampered copy), so state returns intact.
+    const after = auditProofsFor(sim.events);
+    expect(after.index.score).toBe(100);
+    expect(after.index.grade).toBe('EXCELLENT');
+    expect(after.replay.match).toBe(true);
+    expect(after.metrics).toEqual(before.metrics);
+  });
+
+  // The button is usable standalone (no scenario played): this is the exact
+  // empty-ledger transition shown in the dashboard screenshots (100 -> 60 -> 100).
+  it('produces the 100 -> 60 WATCH -> 100 transition on an empty ledger', () => {
+    const sim = createSimulator();
+
+    const clean = auditProofsFor(sim.events);
+    expect(clean.index.score).toBe(100);
+    expect(clean.index.grade).toBe('EXCELLENT');
+    expect(clean.perProgram).toEqual([]);
+
+    const forged = auditProofsFor(tamperEvents(sim.events));
+    expect(forged.index.score).toBe(60);
+    expect(forged.index.grade).toBe('WATCH');
+    expect(forged.replay.match).toBe(false);
+    expect(forged.replay.orderViolations.some((key) => key.includes('ghost-program'))).toBe(true);
+    expect(forged.perProgram.some((row) => row.programId === 'ghost-program')).toBe(true);
+
+    const recovered = auditProofsFor(sim.events);
+    expect(recovered.index.score).toBe(100);
+    expect(recovered.perProgram).toEqual([]);
+  });
 });
