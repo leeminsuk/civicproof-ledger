@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use CivicProof Ledger in research or production pilots, please cite it as below."
+title: "CivicProof Ledger: privacy-preserving duplicate-benefit verification ledger"
+type: software
+authors:
+  - family-names: "Lee"
+    given-names: "Minsuk"
+    alias: "leeminsuk"
+version: 1.0.0
+date-released: 2026-07-07
+license: Apache-2.0
+repository-code: "https://github.com/leeminsuk/civicproof-ledger"
+url: "https://leeminsuk.github.io/civicproof-ledger/"
+abstract: >-
+  Commitment-based duplicate-benefit verification ledger for public grants,
+  contests, scholarships, and vouchers. Program-scoped nullifiers and signed
+  verifiable credentials keep raw personal data off-chain while duplicate
+  applications are rejected at registration time. Anyone can replay the public
+  audit-event log to re-derive the full ledger state (Replay-Verify) and
+  reproduce a deterministic 0-100 Civic Integrity Index.
+keywords:
+  - verifiable-credentials
+  - nullifier
+  - public-sector
+  - privacy
+  - audit

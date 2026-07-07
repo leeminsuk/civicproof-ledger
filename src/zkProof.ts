@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 import { createHash } from 'node:crypto';
 
 // RFC 3526 2048-bit MODP Group prime. This demo is a Schnorr-style

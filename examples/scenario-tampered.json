@@ -1,0 +1,45 @@
+{
+  "$comment": "Tampered audit log: a forged DuplicateDetected event was injected for a claim that was never registered. Replay flags an order violation and the Civic Integrity Index drops from 100 to 60 (audit consistency 40 -> 0). Try: npm run cli -- replay examples/scenario-tampered.json",
+  "events": [
+    {
+      "event": "ClaimRegistered",
+      "programId": "osscontest-2026",
+      "nullifierHash": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "commitmentHash": "0x1111111111111111111111111111111111111111111111111111111111111111",
+      "metadataUri": "urn:civicproof:example:claim:1",
+      "accepted": true,
+      "timestamp": "2026-07-01T09:00:00.000Z"
+    },
+    {
+      "event": "DuplicateDetected",
+      "programId": "osscontest-2026",
+      "nullifierHash": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "commitmentHash": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "metadataUri": "urn:civicproof:example:claim:2",
+      "accepted": false,
+      "reason": "DUPLICATE_CLAIM",
+      "timestamp": "2026-07-01T09:05:00.000Z"
+    },
+    {
+      "event": "ClaimRegistered",
+      "programId": "scholarship-2026",
+      "nullifierHash": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "commitmentHash": "0x3333333333333333333333333333333333333333333333333333333333333333",
+      "metadataUri": "urn:civicproof:example:claim:3",
+      "accepted": true,
+      "timestamp": "2026-07-01T09:10:00.000Z"
+    },
+    {
+      "event": "DuplicateDetected",
+      "programId": "ghost-program-2026",
+      "nullifierHash": "0x9999999999999999999999999999999999999999999999999999999999999999",
+      "commitmentHash": "0x9999999999999999999999999999999999999999999999999999999999999999",
+      "metadataUri": "urn:civicproof:example:forged",
+      "accepted": false,
+      "reason": "DUPLICATE_CLAIM",
+      "timestamp": "2026-07-01T09:15:00.000Z"
+    }
+  ],
+  "credentialChecks": { "total": 3, "validSignatures": 3 },
+  "piiFieldsOnLedger": 0
+}

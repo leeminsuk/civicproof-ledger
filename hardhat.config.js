@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 import hardhatEthers from '@nomicfoundation/hardhat-ethers';
 import hardhatMocha from '@nomicfoundation/hardhat-mocha';
 

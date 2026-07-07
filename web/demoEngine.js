@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 // Interactive demo engine: a stateful ledger simulator, a scripted scenario,
 // a fully client-side red-team attack corpus, and audit-log tamper injection.
 // Pure logic (no DOM) so the same code powers the UI and the Vitest suite.

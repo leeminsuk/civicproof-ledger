@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 import { describe, expect, it } from 'vitest';
 import { createNullifier, InMemoryClaimRegistry, type AuditEvent } from '../src/ledger.js';
 import { computeStateRoot, replayAuditEvents, verifyLedgerReplay } from '../src/replay.js';
