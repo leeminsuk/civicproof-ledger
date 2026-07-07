@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 import { createHash } from 'node:crypto';
 import * as ed25519 from '@noble/ed25519';
 import { canonicalize } from 'json-canonicalize';

@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Live demo (GitHub Pages)
+    url: https://leeminsuk.github.io/civicproof-ledger/
+    about: Four-act interactive demo — ledger simulator, attack theater, integrity dashboard.
+  - name: Security reports
+    url: https://github.com/leeminsuk/civicproof-ledger/security
+    about: Please report vulnerabilities privately (see SECURITY.md), not as public issues.

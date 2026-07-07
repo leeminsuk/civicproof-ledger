@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 import { Command } from 'commander';
 import { createNullifier, InMemoryClaimRegistry } from './ledger.js';
 import { deterministicTestKeyPair, issueCredential, verifyCredential } from './vc.js';

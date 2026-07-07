@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 import { describe, expect, it } from 'vitest';
 import type { AuditEvent } from '../src/ledger.js';
 import { CII_WEIGHTS, computeIntegrityIndex, gradeForScore } from '../src/integrityIndex.js';

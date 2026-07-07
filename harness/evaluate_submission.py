@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
 from __future__ import annotations
 
 import json
@@ -66,6 +67,26 @@ def final_docx_has_no_blanks_when_available() -> bool:
     return all(token not in text for token in forbidden)
 
 
+def spdx_headers_ok() -> bool:
+    targets = (
+        list((ROOT / "src").glob("*.ts"))
+        + [ROOT / "web" / name for name in ["app.js", "hero.js", "demoEngine.js", "proofs.js", "verifier.js"]]
+        + list((ROOT / "scripts").glob("*.mjs"))
+        + list((ROOT / "scripts").glob("*.js"))
+        + [
+            ROOT / "harness" / "evaluate_submission.py",
+            ROOT / "hardhat.config.js",
+            ROOT / "vitest.config.ts",
+            ROOT / "contracts" / "ClaimRegistry.sol",
+        ]
+    )
+    return all(
+        "SPDX-License-Identifier" in path.read_text(encoding="utf-8", errors="ignore")[:300]
+        for path in targets
+        if path.exists()
+    )
+
+
 def main() -> int:
     contract = read("contracts/ClaimRegistry.sol")
     docs_text = "\n".join(read(path) for path in ["README.md", "docs/architecture.md", "docs/security.md", "docs/demo-script.md", "docs/rubric-scorecard.md"] if exists(path))
@@ -102,6 +123,17 @@ def main() -> int:
         ("Interactive demo has hero canvas, attack theater, and tamper toggle", 6, all(token in read("web/index.html") for token in ["hero-canvas", "run-attacks", "tamper-switch", "play-scenario"])),
         ("Browser attack corpus and Node corpus both cover 12 scenarios", 6, "ATK-12" in read("web/demoEngine.js") and "ATK-12" in read("src/attackCorpus.ts")),
         ("Final DOCX verification text has no blank placeholders when available", 6, final_docx_has_no_blanks_when_available()),
+        ("Open-source governance pack exists (CONTRIBUTING/CoC/SECURITY/NOTICE/CHANGELOG/CITATION)", 10, all(exists(p) for p in ["CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "SECURITY.md", "NOTICE", "CHANGELOG.md", "CITATION.cff"])),
+        ("Issue and PR templates exist (including red-team attack-scenario template)", 4, all(exists(p) for p in [".github/ISSUE_TEMPLATE/bug_report.md", ".github/ISSUE_TEMPLATE/feature_request.md", ".github/ISSUE_TEMPLATE/attack_scenario.md", ".github/PULL_REQUEST_TEMPLATE.md"])),
+        ("Korean README exists and links the live demo", 6, exists("README.ko.md") and "leeminsuk.github.io/civicproof-ledger" in read("README.ko.md")),
+        ("First-party sources carry SPDX Apache-2.0 headers", 8, spdx_headers_ok()),
+        ("Property-based fuzz suite exists with fast-check", 10, exists("tests/property.fuzz.test.ts") and "fast-check" in read("package.json") and len(re.findall(r"\bit\(", read("tests/property.fuzz.test.ts"))) >= 8),
+        ("Coverage gate has thresholds and runs in CI", 8, '"coverage"' in read("package.json") and "thresholds" in read("vitest.config.ts") and "npm run coverage" in read(".github/workflows/ci.yml")),
+        ("SBOM is regenerable and freshness-checked in CI", 8, exists("scripts/check-sbom.mjs") and '"sbom"' in read("package.json") and "npm run sbom:check" in read(".github/workflows/ci.yml")),
+        ("Reusable CLI exists, is tested, and documented", 8, exists("src/cli.ts") and exists("tests/cli.test.ts") and '"cli"' in read("package.json") and "npm run cli" in read("README.md")),
+        ("Example scenario fixtures exist and are referenced", 4, exists("examples/scenario-clean.json") and exists("examples/scenario-tampered.json") and "examples/scenario-clean.json" in read("README.md")),
+        ("Version 1.0.0 released with changelog entry", 4, '"version": "1.0.0"' in read("package.json") and "## [1.0.0]" in read("CHANGELOG.md")),
+        ("Node runtime pinned (engines + .nvmrc)", 2, exists(".nvmrc") and '"node"' in read("package.json")),
     ]
 
     score = sum(points for _, points, passed in checks if passed)

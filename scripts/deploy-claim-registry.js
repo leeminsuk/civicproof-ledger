@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 import { network } from 'hardhat';
 
 const { ethers } = await network.create();

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 // Browser mirrors of src/zkProof.ts (Schnorr NIZK demo) and src/nullifierProof.ts
 // (Merkle inclusion proof). Pure BigInt / WebCrypto — no Node dependencies — so
 // the attack theater can run the proof-layer scenarios fully client-side.
