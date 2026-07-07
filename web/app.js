@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 import { mountHero } from './hero.js';
 import { shortHex } from './verifier.js';
 import {

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 import { describe, expect, it } from 'vitest';
 import { createSchnorrNullifierProof, verifySchnorrNullifierProof } from '../src/zkProof.js';
 

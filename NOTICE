@@ -1,0 +1,11 @@
+CivicProof Ledger
+Copyright 2026 CivicProof Ledger contributors
+
+This product is a submission to the 2026 Open Source Developer Contest
+(오픈소스 개발자대회) and is licensed under the Apache License, Version 2.0.
+Source: https://github.com/leeminsuk/civicproof-ledger
+
+This product bundles noble-ed25519 (https://github.com/paulmillr/noble-ed25519),
+licensed under the MIT License, as web/vendor/noble-ed25519.js so the static
+GitHub Pages demo works without a package install. See docs/licenses.md for the
+full third-party license inventory and sbom.spdx.json for the SPDX SBOM.

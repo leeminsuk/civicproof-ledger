@@ -1,6 +1,6 @@
 {
   "name": "civicproof-ledger",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Commitment-based duplicate-benefit verification ledger for public grants and contests.",
   "type": "module",
   "license": "Apache-2.0",
@@ -12,7 +12,11 @@
     "demo": "tsx src/demo.ts",
     "redteam": "tsx src/attackCorpus.ts",
     "deploy:local": "hardhat run scripts/deploy-claim-registry.js",
-    "start": "tsx src/demo.ts"
+    "start": "tsx src/demo.ts",
+    "cli": "tsx src/cli.ts",
+    "coverage": "vitest run --coverage",
+    "sbom": "npm sbom --sbom-format spdx > sbom.spdx.json",
+    "sbom:check": "node scripts/check-sbom.mjs"
   },
   "dependencies": {
     "@noble/ed25519": "^2.3.0",
@@ -27,11 +31,32 @@
     "@nomicfoundation/hardhat-ethers": "^4.0.13",
     "@nomicfoundation/hardhat-mocha": "^3.0.21",
     "@types/node": "^26.0.0",
+    "@vitest/coverage-v8": "^4.1.10",
     "chai": "^6.2.2",
+    "fast-check": "^4.8.0",
     "hardhat": "^3.9.0",
     "mocha": "^11.7.6",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "vitest": "^4.1.9"
-  }
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leeminsuk/civicproof-ledger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/leeminsuk/civicproof-ledger/issues"
+  },
+  "homepage": "https://leeminsuk.github.io/civicproof-ledger/",
+  "keywords": [
+    "verifiable-credentials",
+    "nullifier",
+    "public-sector",
+    "privacy",
+    "audit",
+    "blockchain"
+  ]
 }

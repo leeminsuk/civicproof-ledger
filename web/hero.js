@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 // Lightweight canvas hero: anonymized identities (left) stream through a
 // hashing "shield" and emerge as program-scoped nullifiers (right). No 3D
 // dependency — reliable on GitHub Pages, degrades to a static gradient if the
