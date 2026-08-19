@@ -105,7 +105,7 @@ function renderLedgerItem(result) {
     el('span', { class: 'ev-tag', text: result.status === 'accepted' ? '수리' : '중복차단' }),
     el('span', { class: 'ev-mid' }, [
       el('span', { text: `${result.citizenLabel} · ${result.programLabel}` }),
-      el('small', { text: result.status === 'accepted' ? '최초 등록됨' : '이미 등록된 널리파이어' })
+      el('small', { text: result.status === 'accepted' ? '최초 등록됨' : '이미 등록된 익명 지문' })
     ]),
     el('code', { text: shortHex(result.nullifierHash) })
   ]);
@@ -121,8 +121,8 @@ function showLastResult(result) {
   badge.textContent = result.status === 'accepted' ? 'ACCEPTED' : 'DUPLICATE';
   lastResult.querySelector('.lr-text').textContent =
     result.status === 'accepted'
-      ? `서명 검증 통과 · 프로그램별 널리파이어 신규 등록`
-      : `서명은 유효하나 같은 사업의 널리파이어가 이미 존재 → 차단`;
+      ? `서명 검증 통과 · 사업별 익명 지문 신규 등록`
+      : `서명은 유효하나 같은 사업의 익명 지문이 이미 존재 → 차단`;
   lastResult.querySelector('.lr-nullifier').textContent = shortHex(result.nullifierHash, 14, 8);
 }
 
