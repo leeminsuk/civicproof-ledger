@@ -26,7 +26,8 @@ This repository provides:
 - Demo Ed25519-signed verifiable credential issue and verify helpers using `@noble/ed25519` with RFC8785-compatible JSON canonicalization via `json-canonicalize`.
 - A Merkle inclusion proof helper for nullifier audit reproducibility. This is intentionally labeled as an inclusion proof, not a zero-knowledge proof.
 - A dependency-light Schnorr-style non-interactive proof demo (`src/zkProof.ts`) that proves knowledge of a nullifier secret without placing the subject secret in the proof object. Production should still replace this with audited Semaphore/Noir circuits.
-- An interactive single-page demo under `web/` (civic dark dashboard, self-contained, GitHub Pages-ready) with four acts: an animated hero, a hands-on **ledger simulator** (click citizen × program to see accept/duplicate/cross-program-unlinkability live), an **attack theater** that runs all 12 red-team scenarios in the browser, and an **integrity dashboard** with a Civic Integrity Index gauge, Replay-Verify status, and a "tamper the audit log" toggle that drops the score in real time.
+- An interactive single-page demo under `web/` (civic dark dashboard, self-contained, GitHub Pages-ready) with four acts: an animated hero, a hands-on **ledger simulator** (click citizen × program to see accept/duplicate/cross-program-unlinkability live), an **attack theater** that runs all 12 red-team scenarios in the browser, and an **integrity dashboard** with a Civic Integrity Index gauge, Replay-Verify status, and a "tamper the audit log" one-shot demo that drops the score in real time.
+- A **160-second autopilot demo** (`web/autopilot.js`): one click walks all four acts hands-free — broadcast-style subtitle captions explain what is running, why it matters, and what comes next; a segmented progress HUD tracks the acts; spotlight rings point at the evidence; a finale card summarizes the live stats. The timeline is declarative data checked by its own `validateTimeline()`, the executor takes an injectable clock, and both are unit-tested (virtual-clock suite in `tests/autopilot.test.ts`). `?apspeed=N` compresses wall-clock time for E2E runs, and the contest video is recorded from this mode in one take.
 - A Solidity `ClaimRegistry` with owner-managed issuer allowlist, authorized issuer checks, ownership transfer for multisig/governance migration, program-level duplicate counters, and zero-value input validation.
 - Hardhat tests for deployment, issuer role-based access control, ownership transfer, duplicate detection, program-level duplicate accounting, and read paths.
 - A demo CLI scenario with two accepted claims and one duplicate rejection, ending with a Replay-Verify MATCH and a Civic Integrity Index of 100/100 EXCELLENT.
@@ -76,11 +77,20 @@ To serve the static web verifier locally:
 python3 -m http.server 4173 --directory web
 ```
 
-Then open `http://127.0.0.1:4173/`. The repository also includes `.github/workflows/pages.yml` to publish `web/` with GitHub Pages.
+Then open `http://127.0.0.1:4173/` and press **"160초 자동 시연"** for the hands-free tour. The repository also includes `.github/workflows/pages.yml` to publish `web/` with GitHub Pages.
+
+Browser E2E and the one-take contest video (local, uses the shared Playwright browser cache — nothing extra is downloaded):
+
+```sh
+npm run e2e            # 20x autopilot run must finish with 0 console errors, 12/12 blocked, CII 100, Replay MATCH
+npm run record:video   # real-time 160s run recorded at 1080p (webm + mp4 into ~/Downloads)
+```
 
 ## Submission Evidence
 
 - CI (10 gates): GitHub Actions runs `npm test`, `npm run coverage`, `npm run build`, `npm run test:contracts`, `npm run demo`, `npm run redteam`, `npm run deploy:local`, `npm run evaluate`, `npm audit`, and `npm run sbom:check`.
+- Local Playwright E2E (`npm run e2e`): a complete autopilot run must end with zero console/page errors, 12/12 attacks blocked, CII 100 EXCELLENT, and Replay MATCH. Kept out of the CI gates on purpose so CI stays browser-free and hermetic.
+- The demo video is **produced by the code itself**: `npm run record:video` performs the one-take 160-second autopilot recording (screenshots: `docs/assets/autopilot-start.png`, `autopilot-attacks.png`, `autopilot-finale.png`).
 - Contract hardening: only an authorized issuer can register a claim; the owner can authorize or revoke issuers.
 - Privacy boundary: public state stores only program IDs, nullifier hashes, commitment hashes, metadata URIs, counters, and audit events. Raw identifiers stay off-chain.
 - Final checklist: see [docs/final-submission-checklist.md](docs/final-submission-checklist.md).

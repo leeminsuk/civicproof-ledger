@@ -6,7 +6,7 @@ export default defineConfig({
     include: ['tests/**/*.test.ts'],
     coverage: {
       provider: 'v8',
-      include: ['src/**/*.ts', 'web/demoEngine.js', 'web/proofs.js', 'web/verifier.js'],
+      include: ['src/**/*.ts', 'web/autopilot.js', 'web/demoEngine.js', 'web/proofs.js', 'web/verifier.js'],
       reporter: ['text', 'json-summary'],
       thresholds: {
         statements: 85,
