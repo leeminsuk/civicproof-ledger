@@ -4,7 +4,7 @@
 
 - GitHub repository: `https://github.com/leeminsuk/civicproof-ledger` (public; keep public ≥ 5 years per contest rules)
 - License: `LICENSE` — Apache-2.0, plus `NOTICE` and SPDX headers on all first-party sources
-- SBOM: `sbom.spdx.json` (205 packages) — regenerate with `npm run sbom`, verified by `npm run sbom:check`
+- SBOM: `sbom.spdx.json` (210 packages) — regenerate with `npm run sbom`, verified by `npm run sbom:check`
 - CI: `.github/workflows/ci.yml` (10 gates)
 - GitHub Pages: `.github/workflows/pages.yml` publishing `web/`
 - Web demo: `web/index.html` → <https://leeminsuk.github.io/civicproof-ledger/>
@@ -18,27 +18,29 @@ Run before submission:
 
 ```sh
 npm ci
-npm test               # 90 vitest tests incl. property fuzz + CLI suites
+npm test               # 111 vitest tests incl. property fuzz, CLI, and autopilot suites
 npm run coverage       # enforced thresholds
 npm run build
 npm run test:contracts # 20 hardhat tests
 npm run demo | tee docs/demo-log.txt
 npm run redteam        # must block 12/12
 npm run deploy:local
-npm run evaluate       # currently 340 (minimum 110)
+npm run evaluate       # currently 392 (minimum 110)
 npm audit              # 0 vulnerabilities
 npm run sbom:check     # SBOM matches lockfile
+npm run e2e            # browser E2E: full 160s autopilot run, 0 console errors, 12/12
 python3 -m http.server 4173 --directory web
 ```
 
 Expected quality gate:
 
-- All 110 automated tests pass (Vitest 90 + Hardhat 20).
+- All 131 automated tests pass (Vitest 111 + Hardhat 20).
 - Coverage thresholds met (statements/lines ≥ 85%, branches ≥ 72%).
 - `npm run redteam` blocks 12/12 attacks; demo ends Replay MATCH + CII 100/100 EXCELLENT.
-- `npm run evaluate` score is at least `110` (currently `340`).
+- `npm run evaluate` score is at least `110` (currently `392`).
 - `npm audit` reports `0 vulnerabilities`; `npm run sbom:check` reports OK.
 - Web UI opens at `http://127.0.0.1:4173/` and the four acts work (hero, simulator, attack theater, integrity dashboard).
+- The **160초 자동 시연** button completes a hands-free 160-second tour ending in the finale card (수리 4 · 차단 1 · 12/12 · CII 100 · MATCH · PII 0); `npm run record:video` produces the contest video in one take.
 
 ## Final DOCX Files
 
@@ -59,7 +61,7 @@ Expected quality gate:
 - `npm run demo` — accepted 2 / duplicate 1 / Replay MATCH / CII 100.
 - Live Pages demo: ledger simulator → attack theater (12/12) → tamper toggle (CII 100 → 60 → restore).
 - `npm run cli -- replay examples/scenario-tampered.json` — exit 1 with the forged event flagged.
-- `npm run test:contracts` issuer allowlist tests, then `npm run evaluate` 340/110.
+- `npm run test:contracts` issuer allowlist tests, then `npm run evaluate` 392/110.
 - End on Apache-2.0 + SBOM + CI badges + governance docs.
 
 ## Submission Risk Notes

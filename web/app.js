@@ -11,6 +11,13 @@ import {
   runAttackCorpus,
   tamperEvents
 } from './demoEngine.js';
+import {
+  AUTOPILOT_ACTS,
+  AUTOPILOT_TIMELINE,
+  AUTOPILOT_TOTAL_MS,
+  createAutopilot,
+  nextCaptionAfter
+} from './autopilot.js';
 
 // ── tiny DOM helpers: build nodes via createElement + textContent only, so
 // no raw-markup sink is ever used (XSS-safe against pasted content). ──
@@ -90,6 +97,7 @@ async function submit(citizenId, programId) {
   renderLedgerItem(result);
   showLastResult(result);
   refreshMetricsAndDashboard();
+  return result;
 }
 
 function renderLedgerItem(result) {
@@ -97,12 +105,13 @@ function renderLedgerItem(result) {
     el('span', { class: 'ev-tag', text: result.status === 'accepted' ? '수리' : '중복차단' }),
     el('span', { class: 'ev-mid' }, [
       el('span', { text: `${result.citizenLabel} · ${result.programLabel}` }),
-      el('small', { text: result.status === 'accepted' ? '최초 등록됨' : '이미 등록된 널리파이어' })
+      el('small', { text: result.status === 'accepted' ? '최초 등록됨' : '이미 등록된 익명 지문' })
     ]),
     el('code', { text: shortHex(result.nullifierHash) })
   ]);
   ledger.prepend(item);
   ledgerCount.textContent = `${sim.events.length}건`;
+  return item;
 }
 
 function showLastResult(result) {
@@ -112,8 +121,8 @@ function showLastResult(result) {
   badge.textContent = result.status === 'accepted' ? 'ACCEPTED' : 'DUPLICATE';
   lastResult.querySelector('.lr-text').textContent =
     result.status === 'accepted'
-      ? `서명 검증 통과 · 프로그램별 널리파이어 신규 등록`
-      : `서명은 유효하나 같은 사업의 널리파이어가 이미 존재 → 차단`;
+      ? `서명 검증 통과 · 사업별 익명 지문 신규 등록`
+      : `서명은 유효하나 같은 사업의 익명 지문이 이미 존재 → 차단`;
   lastResult.querySelector('.lr-nullifier').textContent = shortHex(result.nullifierHash, 14, 8);
 }
 
@@ -332,36 +341,311 @@ const tamperBtn = $('#tamper-demo');
 const tamperLabel = tamperBtn.querySelector('.tamper-label');
 let tamperPlaying = false;
 
+function setTamperVisual(state) {
+  tamperBtn.classList.toggle('playing', state === 'playing');
+  tamperBtn.classList.toggle('recovering', state === 'recovering');
+  tamperLabel.textContent =
+    state === 'playing'
+      ? '① 감사 로그 조작 주입 — 지수 하락'
+      : state === 'recovering'
+        ? '② Replay-Verify가 조작 탐지 → 복구'
+        : '감사 로그 조작 시뮬레이션';
+  tamperBtn.disabled = state !== 'idle';
+}
+
+function applyTamperView(on) {
+  dashboardEvents = on ? () => tamperEvents(sim.events) : () => sim.events;
+  renderDashboard();
+}
+
 tamperBtn.addEventListener('click', async () => {
   if (tamperPlaying) return;
   tamperPlaying = true;
-  tamperBtn.disabled = true;
-  tamperBtn.classList.add('playing');
 
   // 1) inject the forged event → dashboard diverges
-  tamperLabel.textContent = '① 감사 로그 조작 주입 — 지수 하락';
-  dashboardEvents = () => tamperEvents(sim.events);
-  renderDashboard();
+  setTamperVisual('playing');
+  applyTamperView(true);
   await sleep(2400);
 
   // 2) Replay-Verify detects the divergence and the state is recomputed clean
-  tamperBtn.classList.remove('playing');
-  tamperBtn.classList.add('recovering');
-  tamperLabel.textContent = '② Replay-Verify가 조작 탐지 → 복구';
-  dashboardEvents = () => sim.events;
-  renderDashboard();
+  setTamperVisual('recovering');
+  applyTamperView(false);
   await sleep(1500);
 
   // 3) back to idle
-  tamperBtn.classList.remove('recovering');
-  tamperLabel.textContent = '감사 로그 조작 시뮬레이션';
-  tamperBtn.disabled = false;
+  setTamperVisual('idle');
   tamperPlaying = false;
 });
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+// ── AUTOPILOT: 160-second hands-free tour ──────────────────────────────────
+// The timeline and executor live in autopilot.js (pure, unit-tested); this
+// block is only the DOM driver: control-room HUD, subtitle captions,
+// achievement chips, spotlight rings and the finale summary overlay.
+const apLayer = $('#autopilot-layer');
+const apStartBtn = $('#autopilot-start');
+const REDUCED_MOTION = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+const AP_SPEED = (() => {
+  const raw = Number(new URLSearchParams(globalThis.location?.search ?? '').get('apspeed'));
+  return Number.isFinite(raw) && raw >= 1 && raw <= 40 ? raw : 1;
+})();
+
+let apRunner = null;
+const apState = { ui: {}, ledgerItems: new Map(), attackReport: null, blocked: 0, spots: [] };
+
+function apFmt(ms) {
+  const s = Math.round(ms / 1000);
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+}
+
+function apBuildHud() {
+  const segs = AUTOPILOT_ACTS.map((act) =>
+    el('div', { class: 'ap-seg', 'data-act': String(act.n), style: `flex-grow:${act.to - act.from}` }, [
+      el('small', { text: `${act.n}막 ${act.label}` })
+    ])
+  );
+  const line = el('i', { class: 'ap-line' });
+  const track = el('div', { class: 'ap-track' }, [...segs, line]);
+  const rec = el('span', { class: 'ap-rec' }, [el('i', { class: 'ap-rec-dot' }), el('span', { text: 'AUTO 시연' })]);
+  const time = el('span', { class: 'ap-time', text: `0:00 / ${apFmt(AUTOPILOT_TOTAL_MS)}` });
+  const stop = el('button', { class: 'ap-stop', type: 'button', text: '✕ 종료 (ESC)' });
+  stop.addEventListener('click', () => (apRunner?.isRunning() ? apRunner.stop() : apTeardown()));
+  const hud = el('div', { class: 'ap-hud' }, [rec, track, time, stop]);
+  apState.ui = { hud, rec, line, time, segs, stop };
+  apLayer.append(hud);
+}
+
+function apCaptionNode() {
+  if (!apState.ui.caption) {
+    const tag = el('small', { class: 'ap-cap-tag' });
+    const title = el('b', { class: 'ap-cap-title' });
+    const detail = el('p', { class: 'ap-cap-detail' });
+    const nextLabel = el('i', { class: 'ap-cap-next-label', text: '다음' });
+    const nextTitle = el('span', { class: 'ap-cap-next-title' });
+    const next = el('div', { class: 'ap-cap-next' }, [nextLabel, nextTitle]);
+    const node = el('div', { class: 'ap-caption', role: 'status', 'aria-live': 'polite' }, [tag, title, detail, next]);
+    apState.ui.caption = { node, tag, title, detail, next, nextTitle };
+    apLayer.append(node);
+  }
+  return apState.ui.caption;
+}
+
+function apChipsNode() {
+  if (!apState.ui.chips) {
+    apState.ui.chips = el('div', { class: 'ap-chips' });
+    apLayer.append(apState.ui.chips);
+  }
+  return apState.ui.chips;
+}
+
+function apClearSpots() {
+  for (const node of apState.spots) node.classList.remove('ap-spot', 'ap-spot-code');
+  apState.spots = [];
+}
+
+function apSpot(node, cls = 'ap-spot', holdMs = 2400) {
+  if (!node) return;
+  node.classList.add(cls);
+  apState.spots.push(node);
+  setTimeout(() => node.classList.remove(cls), holdMs);
+}
+
+function apTeardown() {
+  document.body.classList.remove('autopilot');
+  apClearSpots();
+  for (const key of ['hud', 'chips', 'finale']) {
+    apState.ui[key]?.remove?.();
+    if (apState.ui[key]?.node) apState.ui[key].node.remove();
+  }
+  apState.ui.caption?.node.remove();
+  apState.ui = {};
+  apState.ledgerItems.clear();
+  apState.attackReport = null;
+  apState.blocked = 0;
+  setTamperVisual('idle');
+  apStartBtn.disabled = false;
+}
+
+const apDriver = {
+  begin() {
+    document.body.classList.add('autopilot');
+    apStartBtn.disabled = true;
+    sim.reset();
+    ledger.replaceChildren();
+    ledgerCount.textContent = '0건';
+    lastResult.hidden = true;
+    attackGrid.replaceChildren();
+    attackSummary.hidden = true;
+    dashboardEvents = () => sim.events;
+    setTamperVisual('idle');
+    tamperBtn.disabled = true;
+    apState.ledgerItems.clear();
+    apState.attackReport = null;
+    apState.blocked = 0;
+    refreshMetricsAndDashboard();
+    apBuildHud();
+    apCaptionNode();
+    apChipsNode();
+    globalThis.scrollTo({ top: 0, behavior: REDUCED_MOTION ? 'auto' : 'smooth' });
+  },
+
+  caption({ act, title, detail }, step) {
+    const cap = apCaptionNode();
+    cap.node.setAttribute('data-act', String(act));
+    cap.tag.textContent = `${act}막 · ${AUTOPILOT_ACTS.find((a) => a.n === act)?.label ?? ''}`;
+    cap.title.textContent = title;
+    cap.detail.textContent = detail;
+    const upcoming = nextCaptionAfter(AUTOPILOT_TIMELINE, step?.at ?? 0);
+    cap.next.hidden = !upcoming;
+    cap.nextTitle.textContent = upcoming ? upcoming.title : '';
+    cap.node.classList.remove('swap');
+    void cap.node.offsetWidth;
+    cap.node.classList.add('swap');
+  },
+
+  chip({ text, tone = 'info' }) {
+    const chips = apChipsNode();
+    const chip = el('span', { class: `ap-chip tone-${tone}`, text });
+    chips.append(chip);
+    while (chips.children.length > 4) chips.firstElementChild.remove();
+    setTimeout(() => {
+      chip.classList.add('out');
+      setTimeout(() => chip.remove(), 380);
+    }, 5200);
+  },
+
+  highlight({ target }) {
+    apSpot(document.querySelector(target));
+  },
+
+  scrollTo({ target }) {
+    document.querySelector(target)?.scrollIntoView({ behavior: REDUCED_MOTION ? 'auto' : 'smooth', block: 'start' });
+  },
+
+  async submitStep({ citizenId, programId }) {
+    const result = await submit(citizenId, programId);
+    const item = ledger.firstElementChild;
+    if (result.status === 'accepted' && item) {
+      apState.ledgerItems.set(`${citizenId}:${programId}`, item);
+    }
+    if (item) apSpot(item, 'ap-spot', 1600);
+  },
+
+  compareNullifiers() {
+    const a = apState.ledgerItems.get('citizen-a-private-id:osscontest-2026');
+    const b = apState.ledgerItems.get('citizen-a-private-id:scholarship-2026');
+    for (const item of [a, b]) apSpot(item?.querySelector('code'), 'ap-spot-code', 4200);
+  },
+
+  prepareAttacks() {
+    buildAttackPlaceholders(12);
+    attackSummary.hidden = false;
+    attackScore.textContent = '0 / 12';
+    apState.blocked = 0;
+    apState.attackReport = runAttackCorpus();
+  },
+
+  async revealAttack({ index }) {
+    const report = await apState.attackReport;
+    if (!report) return;
+    const result = report.results[index];
+    fillAttackCard(index, result);
+    if (result.blocked) apState.blocked += 1;
+    attackScore.textContent = `${apState.blocked} / ${report.total}`;
+  },
+
+  tamper({ phase }) {
+    if (phase === 'inject') {
+      setTamperVisual('playing');
+      applyTamperView(true);
+    } else {
+      setTamperVisual('recovering');
+      applyTamperView(false);
+      setTimeout(() => {
+        setTamperVisual('idle');
+        if (document.body.classList.contains('autopilot')) tamperBtn.disabled = true;
+      }, 2000);
+    }
+  },
+
+  finale() {
+    const metrics = sim.metrics();
+    const proofs = auditProofsFor(sim.events);
+    const stats = [
+      { value: String(metrics.acceptedClaims), label: '수리된 신청' },
+      { value: String(metrics.duplicateAttempts), label: '차단된 중복' },
+      { value: `${apState.blocked} / 12`, label: '공격 차단' },
+      { value: `${proofs.index.score}`, label: `CII · ${proofs.index.grade}` },
+      { value: proofs.replay.match ? 'MATCH' : 'DIVERGED', label: 'Replay-Verify' },
+      { value: '0', label: '온체인 개인정보 필드' }
+    ];
+    const card = el('div', { class: 'ap-finale-card' }, [
+      el('p', { class: 'eyebrow', text: 'CivicProof Ledger · 오토파일럿 시연' }),
+      el('h3', { text: '160초 검증 요약' }),
+      el(
+        'div',
+        { class: 'ap-finale-grid' },
+        stats.map((s) => el('div', { class: 'ap-stat' }, [el('span', { text: s.value }), el('small', { text: s.label })]))
+      ),
+      el('p', {
+        class: 'ap-finale-note',
+        text: '방금 본 모든 판정은 브라우저에서 실행된 결정적 코드의 결과이며, 이 시연 타임라인 자체도 자동 테스트로 검증됩니다.'
+      }),
+      el('p', { class: 'ap-finale-repo', text: 'github.com/leeminsuk/civicproof-ledger · Apache-2.0' })
+    ]);
+    const overlay = el('div', { class: 'ap-finale' }, [card]);
+    overlay.addEventListener('click', () => {
+      if (!apRunner?.isRunning()) apTeardown();
+    });
+    apState.ui.finale = overlay;
+    apLayer.append(overlay);
+  },
+
+  progress({ elapsed, total, fraction, act }) {
+    const { line, time, segs } = apState.ui;
+    if (!line) return;
+    line.style.width = `${(fraction * 100).toFixed(2)}%`;
+    time.textContent = `${apFmt(elapsed)} / ${apFmt(total)}`;
+    for (const seg of segs) seg.classList.toggle('active', seg.getAttribute('data-act') === String(act));
+  },
+
+  end() {
+    const { rec, stop, caption } = apState.ui;
+    document.body.classList.remove('autopilot');
+    rec?.classList.add('done');
+    rec?.replaceChildren(el('span', { text: '✓ 시연 완료' }));
+    if (stop) stop.textContent = '닫기';
+    caption?.node.classList.add('fade-out');
+    setTimeout(() => caption?.node.remove(), 900);
+    setTamperVisual('idle');
+    apStartBtn.disabled = false;
+  },
+
+  cleanup() {
+    applyTamperView(false);
+    apTeardown();
+  }
+};
+
+apStartBtn.addEventListener('click', () => {
+  if (apRunner?.isRunning()) return;
+  apTeardown();
+  apRunner = createAutopilot({
+    driver: apDriver,
+    speed: AP_SPEED,
+    onError: (err) => console.error('[autopilot]', err.action, err.message)
+  });
+  apRunner.start();
+});
+
+globalThis.addEventListener('keydown', (event) => {
+  if (event.key !== 'Escape') return;
+  if (apRunner?.isRunning()) apRunner.stop();
+  else if (apState.ui.hud) apTeardown();
+});
 
 // ── boot ──
 buildBoard();

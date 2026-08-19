@@ -132,8 +132,15 @@ def main() -> int:
         ("SBOM is regenerable and freshness-checked in CI", 8, exists("scripts/check-sbom.mjs") and '"sbom"' in read("package.json") and "npm run sbom:check" in read(".github/workflows/ci.yml")),
         ("Reusable CLI exists, is tested, and documented", 8, exists("src/cli.ts") and exists("tests/cli.test.ts") and '"cli"' in read("package.json") and "npm run cli" in read("README.md")),
         ("Example scenario fixtures exist and are referenced", 4, exists("examples/scenario-clean.json") and exists("examples/scenario-tampered.json") and "examples/scenario-clean.json" in read("README.md")),
-        ("Version 1.0.0 released with changelog entry", 4, '"version": "1.0.0"' in read("package.json") and "## [1.0.0]" in read("CHANGELOG.md")),
+        ("Version 1.1.0 released with changelog history (1.1.0 + 1.0.0)", 4, '"version": "1.1.0"' in read("package.json") and "## [1.1.0]" in read("CHANGELOG.md") and "## [1.0.0]" in read("CHANGELOG.md")),
         ("Node runtime pinned (engines + .nvmrc)", 2, exists(".nvmrc") and '"node"' in read("package.json")),
+        ("160s autopilot timeline exists as validated declarative data", 10, exists("web/autopilot.js") and all(token in read("web/autopilot.js") for token in ["AUTOPILOT_TIMELINE", "validateTimeline", "160_000", "createAutopilot"])),
+        ("Autopilot is unit-tested against a virtual clock", 10, exists("tests/autopilot.test.ts") and "createVirtualClock" in read("tests/autopilot.test.ts") and len(re.findall(r"\bit\(", read("tests/autopilot.test.ts"))) >= 15),
+        ("Autopilot narrates with subtitle captions plus coming-up preview", 6, "nextCaptionAfter" in read("web/autopilot.js") and "ap-cap-next" in read("web/styles.css") and "nextCaptionAfter" in read("web/app.js")),
+        ("Autopilot start button and control-room HUD wired into the demo", 6, "autopilot-start" in read("web/index.html") and "ap-hud" in read("web/app.js") and "autopilot-layer" in read("web/index.html")),
+        ("Playwright E2E gate asserts a clean full autopilot run", 8, exists("scripts/e2e-autopilot.mjs") and "12 / 12" in read("scripts/e2e-autopilot.mjs") and '"e2e"' in read("package.json")),
+        ("One-take contest video is recorded by code (record mode)", 6, "--record" in read("scripts/e2e-autopilot.mjs") and "recordVideo" in read("scripts/e2e-autopilot.mjs") and '"record:video"' in read("package.json")),
+        ("Autopilot documented in both READMEs and the shooting guide", 6, "160" in read("README.md") and "오토파일럿" in read("README.ko.md") and exists("docs/submission/시연영상-촬영가이드.md") and "160" in read("docs/submission/시연영상-촬영가이드.md")),
     ]
 
     score = sum(points for _, points, passed in checks if passed)

@@ -25,8 +25,8 @@
           <h1>개인정보를 숨긴 채<br>중복수혜를 검증한다</h1>
           <p class="lede">
             공모전·장학금·복지 바우처의 중복 신청을 기관 간 원본 개인정보 공유 없이 걸러냅니다.
-            공개 원장에는 프로그램별 널리파이어와 서명 증빙만 남고, 누구나 장부를 재검산해
-            <strong>시민 무결성 지수</strong>로 사업 건전성을 확인할 수 있습니다.
+            공개 원장에는 사업마다 다르게 찍히는 <strong>익명 지문</strong>(널리파이어)과 서명 증빙만 남고,
+            누구나 장부를 재검산해 <strong>시민 무결성 지수</strong>로 사업 건전성을 확인할 수 있습니다.
           </p>
           <div class="kpi-row">
             <div class="kpi"><span id="kpi-accepted">0</span><small>수리된 신청</small></div>
@@ -35,7 +35,11 @@
             <div class="kpi kpi-privacy"><span id="kpi-pii">0</span><small>온체인 개인정보 필드</small></div>
           </div>
           <div class="hero-cta">
-            <button id="play-scenario" class="btn btn-primary" type="button">▶ 시나리오 자동 재생</button>
+            <button id="autopilot-start" class="btn btn-autopilot" type="button">
+              <span class="apb-main"><i class="apb-dot" aria-hidden="true"></i>160초 자동 시연</span>
+              <small>원클릭 오토파일럿 · 4막 자동 순회 · 자막 해설</small>
+            </button>
+            <button id="play-scenario" class="btn btn-ghost" type="button">▶ 시나리오 자동 재생</button>
             <a class="btn btn-ghost" href="https://github.com/leeminsuk/civicproof-ledger" target="_blank" rel="noopener">소스코드 (Apache-2.0)</a>
           </div>
         </div>
@@ -50,7 +54,7 @@
           </div>
           <button id="reset-sim" class="btn btn-small" type="button">초기화</button>
         </div>
-        <p class="hint">아래에서 <b>시민 × 사업</b>을 눌러 신청을 발생시켜 보세요. 같은 시민이 같은 사업에 다시 신청하면 <b>차단</b>되고, 다른 사업에 신청하면 <b>다른 널리파이어</b>가 생겨 교차추적이 불가능합니다.</p>
+        <p class="hint">아래에서 <b>시민 × 사업</b>을 눌러 신청을 발생시켜 보세요. 같은 시민이 같은 사업에 다시 신청하면 <b>차단</b>되고, 다른 사업에 신청하면 <b>익명 지문이 달라져</b> 교차추적이 불가능합니다.</p>
         <div class="sim-grid">
           <div class="apply-board" id="apply-board"><!-- built by app.js --></div>
           <div class="ledger-column">
@@ -74,7 +78,7 @@
           </div>
           <button id="run-attacks" class="btn btn-primary" type="button">공격 12종 실행</button>
         </div>
-        <p class="hint">각 카드는 실제 Ed25519 검증·널리파이어 규칙·증명 검산을 브라우저에서 <b>실시간 실행</b>한 결과입니다. 시연이 아니라 코드가 막습니다.</p>
+        <p class="hint">각 카드는 실제 Ed25519 검증·익명 지문 규칙·증명 검산을 브라우저에서 <b>실시간 실행</b>한 결과입니다. 시연이 아니라 코드가 막습니다.</p>
         <div class="attack-summary" id="attack-summary" hidden>
           <span id="attack-score" class="attack-score">0 / 12</span>
           <span class="attack-caption">차단됨</span>
@@ -122,6 +126,7 @@
         <span>모든 판정은 결정적 코드 · 자동 테스트 검증</span>
       </footer>
     </main>
+    <div id="autopilot-layer"></div>
     <script type="module" src="./app.js"></script>
   </body>
 </html>
