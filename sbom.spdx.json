@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "civicproof-ledger@1.0.0",
-  "documentNamespace": "http://spdx.org/spdxdocs/civicproof-ledger-1.0.0-ff118f88-3511-4dcc-977c-3c1186005150",
+  "documentNamespace": "http://spdx.org/spdxdocs/civicproof-ledger-1.0.0-3dd0211e-6da1-4c81-8064-a2d88fb638e0",
   "creationInfo": {
-    "created": "2026-07-07T00:54:09.235Z",
+    "created": "2026-08-19T08:34:01.721Z",
     "creators": [
       "Tool: npm/cli-11.11.0"
     ]
@@ -419,10 +419,10 @@
     },
     {
       "name": "@nomicfoundation/edr",
-      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-0.12.0",
-      "versionInfo": "0.12.0",
+      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-0.15.0",
+      "versionInfo": "0.15.0",
       "packageFileName": "node_modules/@nomicfoundation/edr",
-      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr/-/edr-0.12.0.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr/-/edr-0.15.0.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -430,22 +430,22 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40nomicfoundation/edr@0.12.0"
+          "referenceLocator": "pkg:npm/%40nomicfoundation/edr@0.15.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "7557eb07bd0bfff5b4e6cfacfbf73a9f9d8572dfa454aa17613fbf08a2fd66c35dabfc8baf92da3cdb2fa559101cfd4974088eaee6d4cc0fccc19224e2047101"
+          "checksumValue": "45c067434318b2b8e12ec37e29cbbbab99a7466065c66bfe63497182b0ac493e984c31ff979447de71bcf09f2c0c41a65f28d5cd7d87b17401cbd3711491c5bb"
         }
       ]
     },
     {
       "name": "@nomicfoundation/edr-darwin-arm64",
-      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-darwin-arm64-0.12.0",
-      "versionInfo": "0.12.0",
+      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-darwin-arm64-0.15.0",
+      "versionInfo": "0.15.0",
       "packageFileName": "node_modules/@nomicfoundation/edr-darwin-arm64",
-      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr-darwin-arm64/-/edr-darwin-arm64-0.12.0.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr-darwin-arm64/-/edr-darwin-arm64-0.15.0.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -453,22 +453,22 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40nomicfoundation/edr-darwin-arm64@0.12.0"
+          "referenceLocator": "pkg:npm/%40nomicfoundation/edr-darwin-arm64@0.15.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "cfff23536760663858da22ed2750c68b7b7f376c5b9a382893d2b74747fbf946714922792db5c2167e52a37ddf561e3b4731b33aa101f9893849dc94ab6a1dab"
+          "checksumValue": "9058288a8bbdc9fce88c0922df23a73a51597e40b4a10792f06de2ffc9576939e31234360b594b0e0450b7c43492349d54eb3975a882f9e431fbcb68e11e7fba"
         }
       ]
     },
     {
       "name": "@nomicfoundation/edr-darwin-x64",
-      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-darwin-x64-0.12.0",
-      "versionInfo": "0.12.0",
+      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-darwin-x64-0.15.0",
+      "versionInfo": "0.15.0",
       "packageFileName": "node_modules/@nomicfoundation/edr-darwin-x64",
-      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr-darwin-x64/-/edr-darwin-x64-0.12.0.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr-darwin-x64/-/edr-darwin-x64-0.15.0.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -476,22 +476,22 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40nomicfoundation/edr-darwin-x64@0.12.0"
+          "referenceLocator": "pkg:npm/%40nomicfoundation/edr-darwin-x64@0.15.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "17d46b03ad2612dc5f28588607b42cc9da14c33cf8724a2eb2d54c15e81c20a9a34714556f5aab45888073da1088a31d25621928362c3a91c0049f549b853ffa"
+          "checksumValue": "be71470a3da8c5decdf0483beb4c98e603c01f3ead2fb341f4fb759eb3fcffe5c8bad11d5098e920319a746d23b131cd9aadf4dc4bc78789e4a6e3b7cc109267"
         }
       ]
     },
     {
       "name": "@nomicfoundation/edr-linux-arm64-gnu",
-      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-linux-arm64-gnu-0.12.0",
-      "versionInfo": "0.12.0",
+      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-linux-arm64-gnu-0.15.0",
+      "versionInfo": "0.15.0",
       "packageFileName": "node_modules/@nomicfoundation/edr-linux-arm64-gnu",
-      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr-linux-arm64-gnu/-/edr-linux-arm64-gnu-0.12.0.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr-linux-arm64-gnu/-/edr-linux-arm64-gnu-0.15.0.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -499,22 +499,22 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40nomicfoundation/edr-linux-arm64-gnu@0.12.0"
+          "referenceLocator": "pkg:npm/%40nomicfoundation/edr-linux-arm64-gnu@0.15.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "12d19165b875778045ff54881b9ad5aca43d4749ee36f3e0098894e5f0a66376e88c014e51fe26ec8d9ecc88629b5bdbd500655e615aa0534f64521d325b4118"
+          "checksumValue": "92506ab0c5a5d7d355a24ffd04e717fcf795eccec3ad33380bb792390c9ceb08256594702929bcb43b7041587f6c990e0aaaa054c3ba20e8be210e3141bb20a2"
         }
       ]
     },
     {
       "name": "@nomicfoundation/edr-linux-arm64-musl",
-      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-linux-arm64-musl-0.12.0",
-      "versionInfo": "0.12.0",
+      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-linux-arm64-musl-0.15.0",
+      "versionInfo": "0.15.0",
       "packageFileName": "node_modules/@nomicfoundation/edr-linux-arm64-musl",
-      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr-linux-arm64-musl/-/edr-linux-arm64-musl-0.12.0.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr-linux-arm64-musl/-/edr-linux-arm64-musl-0.15.0.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -522,22 +522,22 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40nomicfoundation/edr-linux-arm64-musl@0.12.0"
+          "referenceLocator": "pkg:npm/%40nomicfoundation/edr-linux-arm64-musl@0.15.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "e605ad98ab957dfb5c3b53946c5ff72933d5491ea4942ed123d67de86e650cedf6e6342162a386fa192f0cf2ad33e9db61ff80d2f78e9dd821a9b520017f84e0"
+          "checksumValue": "3d0ea8a8208e8d06860b20c0d5714359ba46ad718a67c16bdc942b77b7020aa56f201b2183af16ac9ee0aa57f80dd7a2769a488b79bd08d46c5ac45f8fd635ef"
         }
       ]
     },
     {
       "name": "@nomicfoundation/edr-linux-x64-gnu",
-      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-linux-x64-gnu-0.12.0",
-      "versionInfo": "0.12.0",
+      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-linux-x64-gnu-0.15.0",
+      "versionInfo": "0.15.0",
       "packageFileName": "node_modules/@nomicfoundation/edr-linux-x64-gnu",
-      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr-linux-x64-gnu/-/edr-linux-x64-gnu-0.12.0.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr-linux-x64-gnu/-/edr-linux-x64-gnu-0.15.0.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -545,22 +545,22 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40nomicfoundation/edr-linux-x64-gnu@0.12.0"
+          "referenceLocator": "pkg:npm/%40nomicfoundation/edr-linux-x64-gnu@0.15.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "d13cb47e8bf7fcd14bd1d22c84d4c60a2d3ab23573b2007b93e9fd2c0a23fb9eceb2a3fd5f87b73f95f08e54d236ec98b21bfc25d60c1ea63ed59219f121ecc9"
+          "checksumValue": "8fcf58c22bdbb3bf315a3a1215c64ba7ea54a9ed29d29defaa21b5bad1858ff7c9ef31204d005c0be0d48b275d169601dd313bf5364c5286809c455dc538b85f"
         }
       ]
     },
     {
       "name": "@nomicfoundation/edr-linux-x64-musl",
-      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-linux-x64-musl-0.12.0",
-      "versionInfo": "0.12.0",
+      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-linux-x64-musl-0.15.0",
+      "versionInfo": "0.15.0",
       "packageFileName": "node_modules/@nomicfoundation/edr-linux-x64-musl",
-      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr-linux-x64-musl/-/edr-linux-x64-musl-0.12.0.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr-linux-x64-musl/-/edr-linux-x64-musl-0.15.0.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -568,22 +568,22 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40nomicfoundation/edr-linux-x64-musl@0.12.0"
+          "referenceLocator": "pkg:npm/%40nomicfoundation/edr-linux-x64-musl@0.15.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "7b976ededd7bbdd077b40634925dc8a7572ef0273089a7897940b898c3e62fdd470ccfff0107a1aa9c883fcba96a6e007889751fa140df121420303a54e652c6"
+          "checksumValue": "6c9b823f18a1bd2172a060319982f90b237d89de66aa77328a4cb04daefeffe83b81ed8f9f3fb0ec61db8a6fadbc778c03d5d0bf5bd2cb84203649195c60732e"
         }
       ]
     },
     {
       "name": "@nomicfoundation/edr-win32-x64-msvc",
-      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-win32-x64-msvc-0.12.0",
-      "versionInfo": "0.12.0",
+      "SPDXID": "SPDXRef-Package-nomicfoundation.edr-win32-x64-msvc-0.15.0",
+      "versionInfo": "0.15.0",
       "packageFileName": "node_modules/@nomicfoundation/edr-win32-x64-msvc",
-      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr-win32-x64-msvc/-/edr-win32-x64-msvc-0.12.0.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/edr-win32-x64-msvc/-/edr-win32-x64-msvc-0.15.0.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -591,23 +591,23 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40nomicfoundation/edr-win32-x64-msvc@0.12.0"
+          "referenceLocator": "pkg:npm/%40nomicfoundation/edr-win32-x64-msvc@0.15.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "c03f18c6115d958d885dbeee56b485ed51daaed14a5c461e884e88489395d7463b60e504d48cdfc01d1039d2ad2d47a9c01f875e2b3e291cb8876d9d5846d3d0"
+          "checksumValue": "a6751d560678570a9b66ef574c0c497ae19abc0635c37b7177f1e4a6a88ebaee3762bb749e7b113b9800763e2c997266439073cb6c76189d3febcacfe13d4f83"
         }
       ]
     },
     {
       "name": "@nomicfoundation/hardhat-errors",
-      "SPDXID": "SPDXRef-Package-nomicfoundation.hardhat-errors-3.0.15",
-      "versionInfo": "3.0.15",
+      "SPDXID": "SPDXRef-Package-nomicfoundation.hardhat-errors-3.0.20",
+      "versionInfo": "3.0.20",
       "packageFileName": "node_modules/@nomicfoundation/hardhat-errors",
       "description": "The different errors that Hardhat can throw",
-      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/hardhat-errors/-/hardhat-errors-3.0.15.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/hardhat-errors/-/hardhat-errors-3.0.20.tgz",
       "filesAnalyzed": false,
       "homepage": "https://github.com/NomicFoundation/hardhat/tree/main/packages/hardhat-errors",
       "licenseDeclared": "MIT",
@@ -615,13 +615,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40nomicfoundation/hardhat-errors@3.0.15"
+          "referenceLocator": "pkg:npm/%40nomicfoundation/hardhat-errors@3.0.20"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "877af7d91ce999611c0766f3e9aa992a528e3fcb73caf1cb90f16578516ac15be33b90147d2a0c5319bc3a3693b8d80f177e665cf61121287e90d0b09ac29538"
+          "checksumValue": "eb09a2079ce4a90fb777edd36bfbe5d0cbe521776b030505f8e317d9b8bb45b0a005f19b6e305bcd085798952e871e970cc3deb307518e33828692b4eed0cd9b"
         }
       ]
     },
@@ -675,11 +675,11 @@
     },
     {
       "name": "@nomicfoundation/hardhat-utils",
-      "SPDXID": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.3",
-      "versionInfo": "4.1.3",
+      "SPDXID": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.7",
+      "versionInfo": "4.1.7",
       "packageFileName": "node_modules/@nomicfoundation/hardhat-utils",
       "description": "Utilities for Hardhat and its plugins",
-      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/hardhat-utils/-/hardhat-utils-4.1.3.tgz",
+      "downloadLocation": "https://registry.npmjs.org/@nomicfoundation/hardhat-utils/-/hardhat-utils-4.1.7.tgz",
       "filesAnalyzed": false,
       "homepage": "https://github.com/NomicFoundation/hardhat/tree/main/packages/hardhat-utils",
       "licenseDeclared": "MIT",
@@ -687,13 +687,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/%40nomicfoundation/hardhat-utils@4.1.3"
+          "referenceLocator": "pkg:npm/%40nomicfoundation/hardhat-utils@4.1.7"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "4980ca5fa482773b3fe660bf4b50fe023352409ae1c5ebc74c8db84c8a2e2233b45ecd1d074f92e1c602a8758e82f9c72ec86b72b27b5c65234bbf9aa566b54f"
+          "checksumValue": "b326753aa709511d65f090fc70ff7a3cfb639fee791895fa73bab67b4cf55a14fafc38d025909b3a2113d4c0a422be872ba93e64c7ec4d1eca6e786b4622f409"
         }
       ]
     },
@@ -1483,11 +1483,11 @@
     },
     {
       "name": "adm-zip",
-      "SPDXID": "SPDXRef-Package-adm-zip-0.4.16",
-      "versionInfo": "0.4.16",
+      "SPDXID": "SPDXRef-Package-adm-zip-0.6.0",
+      "versionInfo": "0.6.0",
       "packageFileName": "node_modules/adm-zip",
       "description": "Javascript implementation of zip for nodejs with support for electron original-fs. Allows user to create or extract zip files both in memory or to/from disk",
-      "downloadLocation": "https://registry.npmjs.org/adm-zip/-/adm-zip-0.4.16.tgz",
+      "downloadLocation": "https://registry.npmjs.org/adm-zip/-/adm-zip-0.6.0.tgz",
       "filesAnalyzed": false,
       "homepage": "https://github.com/cthackers/adm-zip",
       "licenseDeclared": "MIT",
@@ -1495,13 +1495,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/adm-zip@0.4.16"
+          "referenceLocator": "pkg:npm/adm-zip@0.6.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "4c58b81c129219f20ab0ae580a429a6851b69b83c40f2562666130a1fdcc4c88338a61cbb68ea6b9a1d5a5bae58dd22f22b159cc4abfa789da7ce78b7187a0ae"
+          "checksumValue": "5e57abc8c85bba4b1d2ada1f9d667d4a4fb80944db9ace0c6ff114df6499c13a00c99e51815a2cfe48bc9fecabd0b5873862ae6a46d74eeb983472d08e175d82"
         }
       ]
     },
@@ -1699,11 +1699,11 @@
     },
     {
       "name": "brace-expansion",
-      "SPDXID": "SPDXRef-Package-brace-expansion-2.1.1",
-      "versionInfo": "2.1.1",
+      "SPDXID": "SPDXRef-Package-brace-expansion-2.1.4",
+      "versionInfo": "2.1.4",
       "packageFileName": "node_modules/brace-expansion",
       "description": "Brace expansion as known from sh/bash",
-      "downloadLocation": "https://registry.npmjs.org/brace-expansion/-/brace-expansion-2.1.1.tgz",
+      "downloadLocation": "https://registry.npmjs.org/brace-expansion/-/brace-expansion-2.1.4.tgz",
       "filesAnalyzed": false,
       "homepage": "https://github.com/juliangruber/brace-expansion",
       "licenseDeclared": "MIT",
@@ -1711,13 +1711,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/brace-expansion@2.1.1"
+          "referenceLocator": "pkg:npm/brace-expansion@2.1.4"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "591d5c511363baf04b31904c6ea33452813e5807dd51c115d5c703f0f54154e23e677343e3e4996cdf11b1f4f66ccb86d6ac33e5116f3ee912666e5f1760f978"
+          "checksumValue": "8467d5ccfc6d85b7f7fb6ca383f441b3ad1c074161a814bfcef755ff8c27e3f0663746cd30c1cf73857f05b1627aa7f54ca0061801e76387928da8c29747f65e"
         }
       ]
     },
@@ -2250,11 +2250,11 @@
     },
     {
       "name": "env-paths",
-      "SPDXID": "SPDXRef-Package-env-paths-2.2.1",
-      "versionInfo": "2.2.1",
+      "SPDXID": "SPDXRef-Package-env-paths-4.0.0",
+      "versionInfo": "4.0.0",
       "packageFileName": "node_modules/env-paths",
       "description": "Get paths for storing things like data, config, cache, etc",
-      "downloadLocation": "https://registry.npmjs.org/env-paths/-/env-paths-2.2.1.tgz",
+      "downloadLocation": "https://registry.npmjs.org/env-paths/-/env-paths-4.0.0.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -2262,13 +2262,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/env-paths@2.2.1"
+          "referenceLocator": "pkg:npm/env-paths@4.0.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "fa1d6590b2a164c4d88e8835544a49346ecd64959cb9cd830e4feab2a49345108e5e22e3790d5dd7fb9dad41a1a8cc5480097028d67471fdaea9a9f918bb92d8"
+          "checksumValue": "a713fc78bd92c30693462fca1d8c0b6178a70ecee02f78f115c0589847587d99995db6950ef769a5dd17054f2a573d37ac37ca64c5e0d6898709bb098d9accb3"
         }
       ]
     },
@@ -2800,11 +2800,11 @@
     },
     {
       "name": "hardhat",
-      "SPDXID": "SPDXRef-Package-hardhat-3.9.0",
-      "versionInfo": "3.9.0",
+      "SPDXID": "SPDXRef-Package-hardhat-3.13.0",
+      "versionInfo": "3.13.0",
       "packageFileName": "node_modules/hardhat",
       "description": "Hardhat is an extensible developer tool that helps smart contract developers increase productivity by reliably bringing together the tools they want.",
-      "downloadLocation": "https://registry.npmjs.org/hardhat/-/hardhat-3.9.0.tgz",
+      "downloadLocation": "https://registry.npmjs.org/hardhat/-/hardhat-3.13.0.tgz",
       "filesAnalyzed": false,
       "homepage": "https://hardhat.org",
       "licenseDeclared": "MIT",
@@ -2812,13 +2812,85 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/hardhat@3.9.0"
+          "referenceLocator": "pkg:npm/hardhat@3.13.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "3232c7620c426ea8692dfbba1419079214eef628099adc2020b270770ed7519df18e75cb746797b7087290f035ea18de46b996647e32bf94efe266b0d1d2404b"
+          "checksumValue": "111541ba7b965814d3dc135f665a33a860747121bce318bf3f7f34c06354c6dfa99797b7d3d65598dbd78b0accc599f851ae0b2585bddf20b546702d7fb7cb37"
+        }
+      ]
+    },
+    {
+      "name": "chokidar",
+      "SPDXID": "SPDXRef-Package-chokidar-5.0.0",
+      "versionInfo": "5.0.0",
+      "packageFileName": "node_modules/hardhat/node_modules/chokidar",
+      "description": "Minimal and efficient cross-platform file watching library",
+      "downloadLocation": "https://registry.npmjs.org/chokidar/-/chokidar-5.0.0.tgz",
+      "filesAnalyzed": false,
+      "homepage": "https://github.com/paulmillr/chokidar",
+      "licenseDeclared": "MIT",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/chokidar@5.0.0"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "4d0326737c3ee40c63a4bf22222c1e6c5ef77510c5e1f04889e02a1a7f5118259a115c10e856f67067b7d589ecd11448ce28b982827563bc5b330a354f132997"
+        }
+      ]
+    },
+    {
+      "name": "readdirp",
+      "SPDXID": "SPDXRef-Package-readdirp-5.1.1",
+      "versionInfo": "5.1.1",
+      "packageFileName": "node_modules/hardhat/node_modules/readdirp",
+      "description": "Recursive version of fs.readdir with small RAM & CPU footprint",
+      "downloadLocation": "https://registry.npmjs.org/readdirp/-/readdirp-5.1.1.tgz",
+      "filesAnalyzed": false,
+      "homepage": "https://github.com/paulmillr/readdirp",
+      "licenseDeclared": "MIT",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/readdirp@5.1.1"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "2a4a3e6395d0e9f33e09edddab79bd606c6769c619625f5c035c198da17755baf2d8bde2d6a560f3e08080d3ec5d102b3cc50c09a391ee86bd36a9ed738dc928"
+        }
+      ]
+    },
+    {
+      "name": "ws",
+      "SPDXID": "SPDXRef-Package-ws-8.21.3",
+      "versionInfo": "8.21.3",
+      "packageFileName": "node_modules/hardhat/node_modules/ws",
+      "description": "Simple to use, blazing fast and thoroughly tested websocket client and server for Node.js",
+      "downloadLocation": "https://registry.npmjs.org/ws/-/ws-8.21.3.tgz",
+      "filesAnalyzed": false,
+      "homepage": "https://github.com/websockets/ws",
+      "licenseDeclared": "MIT",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/ws@8.21.3"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "db4d5367f90f5b1a0faff38a5a3aae651d5258a5dcbf1747f9ed71af1f3d6f761b9b32cc1422df9da1b51c52205b324e11667b32fa4afbea1d66e7e0611e7447"
         }
       ]
     },
@@ -2963,6 +3035,30 @@
         {
           "algorithm": "SHA512",
           "checksumValue": "6169dfc91c312fff92b2b5987cea54b73e5bdd80fe9f27e41ef8db71a9f393cce0c8ee00483ebbb95311b7c9396cce252cc0e75dfae24613a97a6c3e35f4f578"
+        }
+      ]
+    },
+    {
+      "name": "is-safe-filename",
+      "SPDXID": "SPDXRef-Package-is-safe-filename-0.1.1",
+      "versionInfo": "0.1.1",
+      "packageFileName": "node_modules/is-safe-filename",
+      "description": "Check if a filename is safe to use in a path join operation",
+      "downloadLocation": "https://registry.npmjs.org/is-safe-filename/-/is-safe-filename-0.1.1.tgz",
+      "filesAnalyzed": false,
+      "homepage": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/is-safe-filename@0.1.1"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "e12ad1ec0767635d4b1df0ca4d9635bba19add1bb165d97760a5964a13b98b2b86e61f104b8183dad39bd38a5e049e48ee95db47e08604d1214dcc0af85ccdde"
         }
       ]
     },
@@ -3136,11 +3232,11 @@
     },
     {
       "name": "js-yaml",
-      "SPDXID": "SPDXRef-Package-js-yaml-4.2.0",
-      "versionInfo": "4.2.0",
+      "SPDXID": "SPDXRef-Package-js-yaml-4.3.1",
+      "versionInfo": "4.3.1",
       "packageFileName": "node_modules/js-yaml",
       "description": "YAML 1.2 parser and serializer",
-      "downloadLocation": "https://registry.npmjs.org/js-yaml/-/js-yaml-4.2.0.tgz",
+      "downloadLocation": "https://registry.npmjs.org/js-yaml/-/js-yaml-4.3.1.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -3148,13 +3244,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/js-yaml@4.2.0"
+          "referenceLocator": "pkg:npm/js-yaml@4.3.1"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "78f5acbda9efd035ae0d1b16f1d9edf91e23437d52091090ee184d70f5d93eca016627a6b9935819feda75976a5f60fcea3eabbcaa774690b155349bf164253b"
+          "checksumValue": "098e9cac6ab7d77317f06930bc1eedce0a7df6f8d0c58d7efb9cb5d3f04a37f1947c7a9668e19030d66406fa92cec64a5a4fe28f01e55b3ce42ee96c18786359"
         }
       ]
     },
@@ -3616,11 +3712,11 @@
     },
     {
       "name": "nanoid",
-      "SPDXID": "SPDXRef-Package-nanoid-3.3.15",
-      "versionInfo": "3.3.15",
+      "SPDXID": "SPDXRef-Package-nanoid-3.3.18",
+      "versionInfo": "3.3.18",
       "packageFileName": "node_modules/nanoid",
       "description": "A tiny (116 bytes), secure URL-friendly unique string ID generator",
-      "downloadLocation": "https://registry.npmjs.org/nanoid/-/nanoid-3.3.15.tgz",
+      "downloadLocation": "https://registry.npmjs.org/nanoid/-/nanoid-3.3.18.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -3628,13 +3724,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/nanoid@3.3.15"
+          "referenceLocator": "pkg:npm/nanoid@3.3.18"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "cbb5b282fffb9843afc53b8440307c4ad5dd3110567f5911fed961033051505901da37dc2ce0313bf48798e3b6ce0cf5a5580adbdfe4caea67d39f7f6c21dd8c"
+          "checksumValue": "0d38383096c631691f8ba55915d36ddbf71a31b432e0ebbe3a9fe1250bc611672755fa00d5003ec7344a033c3d8c3ebe19538e798aff98872e0d276e83a17afb"
         }
       ]
     },
@@ -3712,11 +3808,11 @@
     },
     {
       "name": "p-map",
-      "SPDXID": "SPDXRef-Package-p-map-7.0.4",
-      "versionInfo": "7.0.4",
+      "SPDXID": "SPDXRef-Package-p-map-7.0.6",
+      "versionInfo": "7.0.6",
       "packageFileName": "node_modules/p-map",
       "description": "Map over promises concurrently",
-      "downloadLocation": "https://registry.npmjs.org/p-map/-/p-map-7.0.4.tgz",
+      "downloadLocation": "https://registry.npmjs.org/p-map/-/p-map-7.0.6.tgz",
       "filesAnalyzed": false,
       "homepage": "NOASSERTION",
       "licenseDeclared": "MIT",
@@ -3724,13 +3820,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/p-map@7.0.4"
+          "referenceLocator": "pkg:npm/p-map@7.0.6"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "b64010130f32b0cce6921830f24fb553f88f856361ca42a74a4e11779ccba0f242b8968644fa3a629a2cad981ac472b30c774359666f13f4a4ee1b0bd97fc2a5"
+          "checksumValue": "2383ebc3a8af91dea9f0f898475b57012380381cc8270bb44c1edfa9a5f473ff1cdd001e84d6265f9ec48a3c8618606dddcfc1228c06c15d3745506d5ef1c456"
         }
       ]
     },
@@ -3903,12 +3999,36 @@
       ]
     },
     {
+      "name": "playwright-core",
+      "SPDXID": "SPDXRef-Package-playwright-core-1.62.1",
+      "versionInfo": "1.62.1",
+      "packageFileName": "node_modules/playwright-core",
+      "description": "A high-level API to automate web browsers",
+      "downloadLocation": "https://registry.npmjs.org/playwright-core/-/playwright-core-1.62.1.tgz",
+      "filesAnalyzed": false,
+      "homepage": "https://playwright.dev",
+      "licenseDeclared": "Apache-2.0",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/playwright-core@1.62.1"
+        }
+      ],
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "c0f612c0404963d187ada2125eacaab71d276b42e93b75c45fb8cd0e19ed6dec7bb73512ee42e766c3a516bb85241e078bfae10cc8d71aa1dec0367af2761957"
+        }
+      ]
+    },
+    {
       "name": "postcss",
-      "SPDXID": "SPDXRef-Package-postcss-8.5.16",
-      "versionInfo": "8.5.16",
+      "SPDXID": "SPDXRef-Package-postcss-8.5.26",
+      "versionInfo": "8.5.26",
       "packageFileName": "node_modules/postcss",
       "description": "Tool for transforming styles with JS plugins",
-      "downloadLocation": "https://registry.npmjs.org/postcss/-/postcss-8.5.16.tgz",
+      "downloadLocation": "https://registry.npmjs.org/postcss/-/postcss-8.5.26.tgz",
       "filesAnalyzed": false,
       "homepage": "https://postcss.org/",
       "licenseDeclared": "MIT",
@@ -3916,13 +4036,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/postcss@8.5.16"
+          "referenceLocator": "pkg:npm/postcss@8.5.26"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "beec22965be28a57ca66c8345468f947f630c1c1f1e122ec20e23fecaea64245b1fa5e5c5074e38f983401ab1305cc97b1b7d382bc2c50d99551be71570c8fc2"
+          "checksumValue": "bbcd8def82c5cc6f1c6be743f29b8f9e99535e8187e1f4cfa551ae21bb77e86deabcd964bdf0f49440194b16a5cb7297f134bf2f503582c0849af2a605c55b91"
         }
       ]
     },
@@ -4479,11 +4599,11 @@
     },
     {
       "name": "tsx",
-      "SPDXID": "SPDXRef-Package-tsx-4.22.4",
-      "versionInfo": "4.22.4",
+      "SPDXID": "SPDXRef-Package-tsx-4.23.12",
+      "versionInfo": "4.23.12",
       "packageFileName": "node_modules/tsx",
       "description": "TypeScript Execute (tsx): Node.js enhanced with esbuild to run TypeScript & ESM files",
-      "downloadLocation": "https://registry.npmjs.org/tsx/-/tsx-4.22.4.tgz",
+      "downloadLocation": "https://registry.npmjs.org/tsx/-/tsx-4.23.12.tgz",
       "filesAnalyzed": false,
       "homepage": "https://tsx.hirok.io",
       "licenseDeclared": "MIT",
@@ -4491,13 +4611,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/tsx@4.22.4"
+          "referenceLocator": "pkg:npm/tsx@4.23.12"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "5fc117f97578411e710acae0c5a103f79e334c37d8f0aaa50edb242842f47078724bf3fc6f82053af183429b02f50d579cbabdd79c047f0c18ff3cec902b6686"
+          "checksumValue": "1437f82f8b18ccab73598854fd79b401015d4e3748c4da3d1254dfda6c5733a93c60c1d7cd851ee3238355a5cfe15f6e3056d583c734ab205c70ad8e3b16f8e5"
         }
       ]
     },
@@ -4527,11 +4647,11 @@
     },
     {
       "name": "undici",
-      "SPDXID": "SPDXRef-Package-undici-6.27.0",
-      "versionInfo": "6.27.0",
+      "SPDXID": "SPDXRef-Package-undici-6.28.0",
+      "versionInfo": "6.28.0",
       "packageFileName": "node_modules/undici",
       "description": "An HTTP/1.1 client, written from scratch for Node.js",
-      "downloadLocation": "https://registry.npmjs.org/undici/-/undici-6.27.0.tgz",
+      "downloadLocation": "https://registry.npmjs.org/undici/-/undici-6.28.0.tgz",
       "filesAnalyzed": false,
       "homepage": "https://undici.nodejs.org",
       "licenseDeclared": "MIT",
@@ -4539,13 +4659,13 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/undici@6.27.0"
+          "referenceLocator": "pkg:npm/undici@6.28.0"
         }
       ],
       "checksums": [
         {
           "algorithm": "SHA512",
-          "checksumValue": "6267d5dd89c40f35d10b9959da35ad5961ca1949b5cc8b7c0217ac475b5e9ecf874cdbfe61994dfdda7a1bbdbb2cebcc27cc633fd05eed8d9276bf7a2c39bea6"
+          "checksumValue": "2c863dd7483d4c8d77612f7996b305aecf119bfbbf8ab8077935a8282a2d79e274e02509f767847e3d2b567fbb54a30f06950f894a0129f84dc8b236dc413f28"
         }
       ]
     },
@@ -4962,7 +5082,7 @@
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-hardhat-3.9.0",
+      "spdxElementId": "SPDXRef-Package-hardhat-3.13.0",
       "relatedSpdxElement": "SPDXRef-Package-civicproof-ledger-1.0.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
@@ -4972,7 +5092,12 @@
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-tsx-4.22.4",
+      "spdxElementId": "SPDXRef-Package-playwright-core-1.62.1",
+      "relatedSpdxElement": "SPDXRef-Package-civicproof-ledger-1.0.0",
+      "relationshipType": "DEV_DEPENDENCY_OF"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-tsx-4.23.12",
       "relatedSpdxElement": "SPDXRef-Package-civicproof-ledger-1.0.0",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
@@ -5052,57 +5177,57 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-darwin-arm64-0.12.0",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.edr-0.12.0",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-darwin-arm64-0.15.0",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.edr-0.15.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-darwin-x64-0.12.0",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.edr-0.12.0",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-darwin-x64-0.15.0",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.edr-0.15.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-linux-arm64-gnu-0.12.0",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.edr-0.12.0",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-linux-arm64-gnu-0.15.0",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.edr-0.15.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-linux-arm64-musl-0.12.0",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.edr-0.12.0",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-linux-arm64-musl-0.15.0",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.edr-0.15.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-linux-x64-gnu-0.12.0",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.edr-0.12.0",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-linux-x64-gnu-0.15.0",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.edr-0.15.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-linux-x64-musl-0.12.0",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.edr-0.12.0",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-linux-x64-musl-0.15.0",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.edr-0.15.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-win32-x64-msvc-0.12.0",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.edr-0.12.0",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-win32-x64-msvc-0.15.0",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.edr-0.15.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.3",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-errors-3.0.15",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.7",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-errors-3.0.20",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-hardhat-3.9.0",
+      "spdxElementId": "SPDXRef-Package-hardhat-3.13.0",
       "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-ethers-4.0.13",
       "relationshipType": "PREREQUISITE_FOR"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-errors-3.0.15",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-errors-3.0.20",
       "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-ethers-4.0.13",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.3",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.7",
       "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-ethers-4.0.13",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -5117,7 +5242,7 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-hardhat-3.9.0",
+      "spdxElementId": "SPDXRef-Package-hardhat-3.13.0",
       "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-mocha-3.0.21",
       "relationshipType": "PREREQUISITE_FOR"
     },
@@ -5127,12 +5252,12 @@
       "relationshipType": "PREREQUISITE_FOR"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-errors-3.0.15",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-errors-3.0.20",
       "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-mocha-3.0.21",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.3",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.7",
       "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-mocha-3.0.21",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -5142,7 +5267,7 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-tsx-4.22.4",
+      "spdxElementId": "SPDXRef-Package-tsx-4.23.12",
       "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-mocha-3.0.21",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -5153,37 +5278,37 @@
     },
     {
       "spdxElementId": "SPDXRef-Package-streamparser.json-node-0.0.22",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.3",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.7",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-env-paths-2.2.1",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.3",
+      "spdxElementId": "SPDXRef-Package-env-paths-4.0.0",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.7",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-ethereum-cryptography-2.2.1",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.3",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.7",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-fast-equals-5.4.0",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.3",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.7",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-json-stream-stringify-3.1.7",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.3",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.7",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-rfdc-1.4.1",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.3",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.7",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-undici-6.27.0",
-      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.3",
+      "spdxElementId": "SPDXRef-Package-undici-6.28.0",
+      "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.7",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
@@ -5192,12 +5317,12 @@
       "relationshipType": "PREREQUISITE_FOR"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-errors-3.0.15",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-errors-3.0.20",
       "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-zod-utils-3.0.5",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.3",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.7",
       "relatedSpdxElement": "SPDXRef-Package-nomicfoundation.hardhat-zod-utils-3.0.5",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -5458,7 +5583,7 @@
     },
     {
       "spdxElementId": "SPDXRef-Package-balanced-match-1.0.2",
-      "relatedSpdxElement": "SPDXRef-Package-brace-expansion-2.1.1",
+      "relatedSpdxElement": "SPDXRef-Package-brace-expansion-2.1.4",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
@@ -5559,6 +5684,11 @@
     {
       "spdxElementId": "SPDXRef-Package-strip-ansi-6.0.1",
       "relatedSpdxElement": "SPDXRef-Package-enquirer-2.4.1",
+      "relationshipType": "DEPENDENCY_OF"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-is-safe-filename-0.1.1",
+      "relatedSpdxElement": "SPDXRef-Package-env-paths-4.0.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
@@ -5697,93 +5827,98 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-0.12.0",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.edr-0.15.0",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-errors-3.0.15",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-errors-3.0.20",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.3",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-utils-4.1.7",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-vendored-3.0.4",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-nomicfoundation.hardhat-zod-utils-3.0.5",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-nomicfoundation.solidity-analyzer-0.1.2",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-sentry.core-9.47.1",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-adm-zip-0.4.16",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "spdxElementId": "SPDXRef-Package-adm-zip-0.6.0",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-chokidar-4.0.3",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "spdxElementId": "SPDXRef-Package-chokidar-5.0.0",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-enquirer-2.4.1",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-ethereum-cryptography-2.2.1",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-micro-eth-signer-0.14.0",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-p-map-7.0.4",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "spdxElementId": "SPDXRef-Package-p-map-7.0.6",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-resolve.exports-2.0.3",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-semver-7.8.5",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-tsx-4.22.4",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "spdxElementId": "SPDXRef-Package-tsx-4.23.12",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-ws-8.21.0",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "spdxElementId": "SPDXRef-Package-ws-8.21.3",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-zod-3.25.76",
-      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.9.0",
+      "relatedSpdxElement": "SPDXRef-Package-hardhat-3.13.0",
+      "relationshipType": "DEPENDENCY_OF"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package-readdirp-5.1.1",
+      "relatedSpdxElement": "SPDXRef-Package-chokidar-5.0.0",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
@@ -5828,7 +5963,7 @@
     },
     {
       "spdxElementId": "SPDXRef-Package-argparse-2.0.1",
-      "relatedSpdxElement": "SPDXRef-Package-js-yaml-4.2.0",
+      "relatedSpdxElement": "SPDXRef-Package-js-yaml-4.3.1",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
@@ -5907,7 +6042,7 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-brace-expansion-2.1.1",
+      "spdxElementId": "SPDXRef-Package-brace-expansion-2.1.4",
       "relatedSpdxElement": "SPDXRef-Package-minimatch-9.0.9",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -5957,7 +6092,7 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-js-yaml-4.2.0",
+      "spdxElementId": "SPDXRef-Package-js-yaml-4.3.1",
       "relatedSpdxElement": "SPDXRef-Package-mocha-11.7.6",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -6037,18 +6172,18 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-nanoid-3.3.15",
-      "relatedSpdxElement": "SPDXRef-Package-postcss-8.5.16",
+      "spdxElementId": "SPDXRef-Package-nanoid-3.3.18",
+      "relatedSpdxElement": "SPDXRef-Package-postcss-8.5.26",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-picocolors-1.1.1",
-      "relatedSpdxElement": "SPDXRef-Package-postcss-8.5.16",
+      "relatedSpdxElement": "SPDXRef-Package-postcss-8.5.26",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-source-map-js-1.2.1",
-      "relatedSpdxElement": "SPDXRef-Package-postcss-8.5.16",
+      "relatedSpdxElement": "SPDXRef-Package-postcss-8.5.26",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
@@ -6133,12 +6268,12 @@
     },
     {
       "spdxElementId": "SPDXRef-Package-esbuild-0.28.1",
-      "relatedSpdxElement": "SPDXRef-Package-tsx-4.22.4",
+      "relatedSpdxElement": "SPDXRef-Package-tsx-4.23.12",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-fsevents-2.3.3",
-      "relatedSpdxElement": "SPDXRef-Package-tsx-4.22.4",
+      "relatedSpdxElement": "SPDXRef-Package-tsx-4.23.12",
       "relationshipType": "OPTIONAL_DEPENDENCY_OF"
     },
     {
@@ -6152,7 +6287,7 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-tsx-4.22.4",
+      "spdxElementId": "SPDXRef-Package-tsx-4.23.12",
       "relatedSpdxElement": "SPDXRef-Package-vite-8.1.3",
       "relationshipType": "DEPENDENCY_OF"
     },
@@ -6167,7 +6302,7 @@
       "relationshipType": "DEPENDENCY_OF"
     },
     {
-      "spdxElementId": "SPDXRef-Package-postcss-8.5.16",
+      "spdxElementId": "SPDXRef-Package-postcss-8.5.26",
       "relatedSpdxElement": "SPDXRef-Package-vite-8.1.3",
       "relationshipType": "DEPENDENCY_OF"
     },

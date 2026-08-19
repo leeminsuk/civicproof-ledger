@@ -35,7 +35,11 @@
             <div class="kpi kpi-privacy"><span id="kpi-pii">0</span><small>온체인 개인정보 필드</small></div>
           </div>
           <div class="hero-cta">
-            <button id="play-scenario" class="btn btn-primary" type="button">▶ 시나리오 자동 재생</button>
+            <button id="autopilot-start" class="btn btn-autopilot" type="button">
+              <span class="apb-main"><i class="apb-dot" aria-hidden="true"></i>160초 자동 시연</span>
+              <small>원클릭 오토파일럿 · 4막 자동 순회 · 자막 해설</small>
+            </button>
+            <button id="play-scenario" class="btn btn-ghost" type="button">▶ 시나리오 자동 재생</button>
             <a class="btn btn-ghost" href="https://github.com/leeminsuk/civicproof-ledger" target="_blank" rel="noopener">소스코드 (Apache-2.0)</a>
           </div>
         </div>
@@ -122,6 +126,7 @@
         <span>모든 판정은 결정적 코드 · 자동 테스트 검증</span>
       </footer>
     </main>
+    <div id="autopilot-layer"></div>
     <script type="module" src="./app.js"></script>
   </body>
 </html>

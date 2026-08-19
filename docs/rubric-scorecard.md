@@ -1,20 +1,21 @@
 # CivicProof Ledger — Harsh Rubric Scorecard
 
-This file separates deterministic readiness from judge competitiveness. It is not an official contest score. Last refreshed for v1.0.0 (2026-07-07).
+This file separates deterministic readiness from judge competitiveness. It is not an official contest score. Last refreshed for v1.1.0 (2026-08-19).
 
 ## Current Readiness Evidence
 
 | Gate | Evidence | Status |
 |---|---|---|
-| Tests | Vitest 90 (incl. property fuzz + CLI suites) + Hardhat 20 = 110 | Pass |
+| Tests | Vitest 111 (incl. property fuzz, CLI, and autopilot suites) + Hardhat 20 = 131 | Pass |
 | Coverage | `npm run coverage` — v8 provider, enforced thresholds (stmts/lines ≥ 85, branches ≥ 72) | Pass |
 | Build | `npm run build` (strict TypeScript) | Pass |
 | Local deploy | `npm run deploy:local` + `docs/deployments/local-hardhat-claim-registry.json` | Pass |
 | Demo | `npm run demo` accepted 2 / duplicate 1 / PII 0 / Replay MATCH / CII 100 | Pass |
 | Red team | `npm run redteam` blocked 12/12 | Pass |
-| Harness | `npm run evaluate` 340/110 | Pass |
+| Harness | `npm run evaluate` 392/110 | Pass |
 | Audit | `npm audit` | 0 vulnerabilities |
-| SBOM | `npm run sbom:check` — 205 packages match the lockfile | Pass |
+| SBOM | `npm run sbom:check` — platform-independent package set matches the lockfile (210 SBOM entries) | Pass |
+| Browser E2E | `npm run e2e` — full 160s autopilot run, 0 console errors, 12/12 blocked, CII 100, Replay MATCH | Pass |
 | Governance | CONTRIBUTING · CoC 2.1 · SECURITY · NOTICE · CHANGELOG · CITATION · templates · SPDX headers | Shipped |
 
 ## Official-Rubric-Oriented Target
@@ -23,10 +24,10 @@ This file separates deterministic readiness from judge competitiveness. It is no
 |---|---:|---|---|---:|
 | Problem / Creativity | 20 | Public-benefit duplicate-prevention + privacy-minimizing ledger; social-problem framing | Similarity to existing nullifier patterns | 18 |
 | Technical Implementation | 30 | Ed25519 VC, RFC8785 canonicalization, Schnorr NIZK demo, RBAC, replay engine, property-based fuzzing | Audited Semaphore/Noir circuit not yet shipped | 28 |
-| Completeness / Demo | 20 | 4-act Pages UI, reusable CLI, 110 tests, coverage gate, local deploy artifact | Public testnet requires funds; video URL pending | 18 |
+| Completeness / Demo | 20 | 4-act Pages UI + 160s autopilot demo with subtitle narration, one-take video recorded by code, reusable CLI, 131 tests, coverage gate, local deploy artifact | Public testnet requires funds; YouTube upload pending | 19 |
 | Open Source / License | 15 | Apache-2.0 + SPDX headers everywhere, SBOM regenerable + CI-checked, full governance pack, Korean README | — | 15 |
 | Impact / Expansion | 15 | Public-sector scenarios, CLI reuse for external audit logs, KMS/multisig/ZK roadmap | No real institution pilot | 13 |
-| **Estimated competitive score after v1.0.0 hardening** | **100** |  |  | **92** |
+| **Estimated competitive score after v1.1.0 hardening** | **100** |  |  | **93** |
 
 ## Path to 95+
 
